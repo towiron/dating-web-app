@@ -1,0 +1,8 @@
+db.sqlite3
+/media/profile_banners/
+/media/profile_pics/
+local_settings.py
+prod_settings.py
+__pycache__/
+*.py[cod]
+*$py.class

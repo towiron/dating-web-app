@@ -3,5 +3,137 @@
 {% load static %}
 
 {% block content %}
-<h1>Home</h1>
+<div class="row g-2">
+{% for user_profile in profiles %}
+{% if user.username == user_profile.username %}
+  <!-- continue -->
+{% else %}
+  {% if user.profile.sex == "M" and user.profile.seeking == "M" %}
+    {% if user_profile.profile.sex == "M" and user_profile.profile.seeking == "M" %}
+    <a href="{% url 'user_account' user_profile.id %}" id="a-card">
+      <div class="card m-2" style="width: 13.2rem;">
+        <div class="img-wrap">
+        <img src="{{ user_profile.profile.profile_pic.url }}" class="card-img-top" style="object-fit: cover; object-position: center;" alt="...">
+          {% if user_profile.profile.online_status %}  
+            <div class="status-circle-online"></div>
+          {% else %}
+            <div class="status-circle-offline"></div>
+          {% endif %}
+        </div>
+        <div class="card-body">
+          <p class="card-text">
+              <img src="{% static 'user_app/male.png' %}" style="height: 1rem;" alt="">
+              {% if user_profile.profile.first_name is not None %}
+                <b>{{ user_profile.profile.first_name }}, {{ user_profile.profile.age }}</b>
+              {% else %}  
+                <b>{{ user_profile.username }}, {{ user_profile.profile.age }}</b>
+              {% endif %}
+            {% if user_profile.profile.online_status == False %}  
+            <p class="last-seen">Last seen: {{ user_profile.last_login|date:"SHORT_DATE_FORMAT"}} <br>at {{ user_profile.last_login|time:"h:i a" }}</p>
+            {% endif %}
+            </p>
+          <p>{{ user_profile.profile.about|truncatechars:80 }}</p>
+        </div>
+      </div>
+      </a>
+    {% endif %}
+
+  {% elif user.profile.sex == "M" and user.profile.seeking == "F" %}
+    {% if user_profile.profile.sex == "F" and user_profile.profile.seeking == "M" %}
+    <a href="{% url 'user_account' user_profile.id %}" id="a-card">
+    <div class="card m-2" style="width: 13.2rem;">
+      <div class="img-wrap">
+      <img src="{{ user_profile.profile.profile_pic.url }}" class="card-img-top" style="object-fit: cover; object-position: center;" alt="...">
+        {% if user_profile.profile.online_status %}  
+          <div class="status-circle-online"></div>
+        {% else %}
+          <div class="status-circle-offline"></div>
+        {% endif %}
+      </div>
+      <div class="card-body">
+        <p class="card-text">
+            <img src="{% static 'user_app/female.png' %}" style="height: 1rem;" alt="">
+            {% if user_profile.profile.first_name is not None %}
+                <b>{{ user_profile.profile.first_name }}, {{ user_profile.profile.age }}</b>
+              {% else %}  
+                <b>{{ user_profile.username }}, {{ user_profile.profile.age }}</b>
+              {% endif %}
+          {% if user_profile.profile.online_status == False %}  
+          <p class="last-seen">Last seen: {{ user_profile.last_login|date:"SHORT_DATE_FORMAT"}} <br>at {{ user_profile.last_login|time:"h:i a" }}</p>
+          {% endif %}
+          </p>
+        <p>{{ user_profile.profile.about|truncatechars:80 }}</p>
+      </div>
+    </div>
+    </a>
+    {% endif %}
+
+  {% elif user.profile.sex == "F" and user.profile.seeking == "F" %}
+    {% if user_profile.profile.sex == "F" and user_profile.profile.seeking == "F" %}
+    <a href="{% url 'user_account' user_profile.id %}" id="a-card">
+      <div class="card m-2" style="width: 13.2rem;">
+        <div class="img-wrap">
+        <img src="{{ user_profile.profile.profile_pic.url }}" class="card-img-top" style="object-fit: cover; object-position: center;" alt="...">
+          {% if user_profile.profile.online_status %}  
+            <div class="status-circle-online"></div>
+          {% else %}
+            <div class="status-circle-offline"></div>
+          {% endif %}
+        </div>
+        <div class="card-body">
+          <p class="card-text">
+              <img src="{% static 'user_app/female.png' %}" style="height: 1rem;" alt="">
+            {% if user_profile.profile.first_name is not None %}
+                <b>{{ user_profile.profile.first_name }}, {{ user_profile.profile.age }}</b>
+              {% else %}  
+                <b>{{ user_profile.username }}, {{ user_profile.profile.age }}</b>
+              {% endif %}
+            {% if user_profile.profile.online_status == False %}  
+            <p class="last-seen">Last seen: {{ user_profile.last_login|date:"SHORT_DATE_FORMAT"}} <br>at {{ user_profile.last_login|time:"h:i a" }}</p>
+            {% endif %}
+            </p>
+          <p>{{ user_profile.profile.about|truncatechars:80 }}</p>
+        </div>
+      </div>
+      </a>
+    {% endif %}
+
+  {% elif user.profile.sex == "F" and user.profile.seeking == "M" %}
+    {% if user_profile.profile.sex == "M" and user_profile.profile.seeking == "F" %}
+    <a href="{% url 'user_account' user_profile.id %}" id="a-card">
+      <div class="card m-2" style="width: 13.2rem;">
+        <div class="img-wrap">
+        <img src="{{ user_profile.profile.profile_pic.url }}" class="card-img-top" style="object-fit: cover; object-position: center;" alt="...">
+          {% if user_profile.profile.online_status %}  
+            <div class="status-circle-online"></div>
+          {% else %}
+            <div class="status-circle-offline"></div>
+          {% endif %}
+        </div>
+        <div class="card-body">
+          <p class="card-text">
+              <img src="{% static 'user_app/male.png' %}" style="height: 1rem;" alt="">
+              {% if user_profile.profile.first_name is not None %}
+                <b>{{ user_profile.profile.first_name }}, {{ user_profile.profile.age }}</b>
+              {% else %}  
+                <b>{{ user_profile.username }}, {{ user_profile.profile.age }}</b>
+              {% endif %}
+            {% if user_profile.profile.online_status == False %}  
+            <p class="last-seen">Last seen: {{ user_profile.last_login|date:"SHORT_DATE_FORMAT"}} <br>at {{ user_profile.last_login|time:"h:i a" }}</p>
+            {% endif %}
+            </p>
+          <p>{{ user_profile.profile.about|truncatechars:80 }}</p>
+        </div>
+      </div>
+      </a>
+    {% endif %}
+{% endif %}
+{% endif %}
+{% endfor %}
+</div>
+{% if user.profile.sex is None or user.profile.seeking is None%}
+    <div class="container text-center">
+    <h2>Please, fill out your <a href="{% url 'user_app:user_account' %}">account</a> to find a partner</h2>
+    </div>
+{% endif %}
 {% endblock %}

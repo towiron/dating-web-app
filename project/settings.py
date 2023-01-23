@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'chat_app',
     'dating_app',
     'user_app',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -130,3 +131,5 @@ MEDIA_ROOT = BASE_DIR / 'media/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOGIN_URL = 'user_app:signin'

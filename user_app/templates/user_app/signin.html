@@ -1,0 +1,37 @@
+{% extends "dating_app/base.html" %}
+
+{% load static %}
+
+{% block content %}
+<br>
+<div class="d-flex justify-content-between">
+    <div class="p-2">
+        <h1 class="signup-title">Hey, Hello<span><img src="{% static 'user_app/hi_emoji.png' %}" height="80"></span></h1>
+        <p>Enter the information you entered while registering.</p>
+        <br>
+        <br>
+        {% if error %}
+            <div class="alert alert-danger text-center" role="alert">
+                {{ error }}
+            </div>
+        {% endif %}
+        <form action="" method="POST">
+            {% csrf_token %}
+            <h5>Login</h5>
+            <input type="text" name="username" id="username" class="form-control">
+            <br>
+            <h5>Password</h5>
+            <input type="password" name="password" id="password" class="form-control">
+            <br>
+            <button class="btn-next">Sign In</button>
+            <div class="container text-center">
+                <p>Don't have an account? <a href="{% url 'user_app:signup' %}">Sign Up</a></p>
+            </div>
+        </form>
+    </div>
+    <div class="p-2">
+        <img src="{% static 'user_app/signin.jpg' %}" alt="relationship pic" width="600">
+    </div>
+</div>
+
+{% endblock %}

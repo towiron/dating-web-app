@@ -1,0 +1,120 @@
+{% extends "dating_app/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<section class="h-100 gradient-custom-2 w-100">
+  <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+  <div class="container py-10 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col col-lg-9 col-xxl-7">
+        <div class="card_profile">
+          <div class="upper">
+
+            <img src="{{ user.profile.banner.url }}" style="object-fit: cover; object-position: center; height: 200px;" class="img-fluid">
+            
+          </div>
+
+          <div class="user text-center">
+
+            <div class="profile">
+
+              <img src="{{ user.profile.profile_pic.url }}" style="object-fit: cover; object-position: center; height: 200px;" class="rounded-circle" width="80">
+              
+            </div>
+          </div>
+          <div class="text-black" style="background-color: #ffffff; padding: 20px 0 20px 50px;">
+            <div class="container text-center">
+              <div class="btn btn-outline-primary">
+                <label class="form-label" for="id_banner">Change banner</label>      
+                <input type="file" name="banner" accept="image/*" class="form-control d-none" id="id_banner" />
+            </div>  
+            </div>
+            <div class="btn btn-outline-primary" style="margin: 40px 0 0 10px;">
+              <label class="form-label" for="id_profile_pic">Change photo</label>      
+              <input type="file" name="profile_pic" accept="image/*" class="form-control d-none" id="id_profile_pic" />
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+  <div class="container py-10 h-100 mt-3">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col col-lg-9 col-xxl-7">
+          <div class="card">
+            <div class="p-4 text-black" style="background-color: #ffffff;">
+                <fieldset class="form-group">
+                  <legend class="border-bottom mb-4"><h2>Profile</h2></legend>
+                  <h5>Login</h5>
+                  <input type="text" name="username" id="username" class="form-control" value="{{ user.username }}">
+                  <h5>First name</h5>
+                  <input type="text" name="first_name" id="id_first_name" class="form-control" value="{{ user.profile.first_name }}">
+                  <h5>Last name</h5>
+                  <input type="text" name="last_name" id="id_last_name" class="form-control" value="{{ user.profile.last_name }}">
+                  <h5>Email</h5>
+                  <input type="email" name="email" id="id_email" class="form-control" value="{{ user.email }}">
+                  <h5>Age*</h5>
+                  <input type="number" name="age" id="id_age" class="form-control" min="18" value="{{ user.profile.age }}">
+                  <h5>Location</h5>
+                  <input type="text" name="city" id="id_city" class="form-control" value="{{ user.profile.city }}" placeholder="Your country and city">
+                  <h5>I am a*</h5>
+                  {% if user.profile.sex == "M" %}
+                  <select name="sex" class="form-control" id="id_sex">
+                    <option value="M" selected="selected">Male</option>
+                    <option value="F">Female</option>
+                  </select>
+                  {% else %}
+                  <select name="sex" class="form-control" id="id_sex">
+                    <option value="M">Male</option>
+                    <option value="F" selected="selected">Female</option>
+                  </select>
+                  {% endif %}
+                  
+                  <h5>Seeking a*</h5>
+                  {% if user.profile.seeking == "M" %}
+                  <select name="seeking" class="form-control" id="id_seeking">
+                    <option value="M" selected="selected">Male</option>
+                    <option value="F">Female</option>
+                  </select>
+                  {% else %}
+                  <select name="seeking" class="form-control" id="id_seeking">
+                    <option value="M">Male</option>
+                    <option value="F" selected="selected">Female</option>
+                  </select>
+                  {% endif %}
+                  <h5>Some intersting details about you</h5>
+                  <textarea name="about" cols="40" rows="10" class="form-control" id="id_about">{{ user.profile.about }}</textarea>
+                  <h5>Your status</h5>
+                  <select name="online_status" id="id_online_status" class="form-control">
+                    {% if user.profile.online_status %}
+                      <option value="false">Offline</option>
+                      <option value="True" selected="selected">Online</option>
+                    {% else %}
+                    <option value="false" selected="selected">Offline</option>
+                    <option value="True">Online</option>
+                    {% endif %}
+                  </select>
+                  <!-- {{ u_form|crispy }}
+                  User form
+                  {{ p_form|crispy }}
+                  Profile form -->
+                </fieldset>
+                <div class="form-group">
+                  <button class="btn btn-outline-info" type="submit">Update</button>
+                </div>
+              </form>
+              <form action="{% url 'user_app:logout_user' %}" method="POST">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger">Logout</button>
+              </form>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+</section>
+{% endblock %}

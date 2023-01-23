@@ -1,0 +1,241 @@
+.navbar-nav .nav-link {
+    color: rgba(0,0,0,1) !important;
+}
+
+.navbar-nav .nav-link:hover {
+    color: rgba(0,0,0,.5) !important;
+}
+
+body {
+    font-family: 'Barlow', sans-serif;
+}
+
+#blogtitle {
+    font-size: 6rem;
+}
+
+@media (min-width: 992px) {
+    #hometext {
+        font-size: 4rem;
+    }
+    #blogdetailtitle {
+        font-size: 5rem;
+    }
+}
+
+.signup-title{
+    font-size: 50pt;
+    font-weight: bold;
+}
+
+h5{
+    font-size: 15pt;
+    font-weight: bold;
+}
+.form-control{
+    width: 350px;
+    background: #f8f8f8;
+    border: 0;
+    border-radius: 10px;
+}
+.btn-next{
+    background-color: #8539f7;
+    border: 3px #6428bf;
+    border-radius: 10px;
+    width: 350px;
+    padding: 10px 0;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: 500;
+}
+.btn-next:hover{
+    background-color: #5f1ec2;
+}
+
+.card{
+    -webkit-box-shadow: 0px 4px 13px -2px rgba(34, 60, 80, 0.07);
+    -moz-box-shadow: 0px 4px 13px -2px rgba(34, 60, 80, 0.07);
+    box-shadow: 0px 4px 13px -2px rgba(34, 60, 80, 0.07);
+    border: 0;
+}
+.card:hover{
+    -webkit-box-shadow: 0px 4px 13px -2px rgba(40, 135, 208, 0.2);
+    -moz-box-shadow: 0px 4px 13px -2px rgba(40, 135, 208, 0.2);
+    box-shadow: 0px 4px 13px -2px rgba(40, 135, 208, 0.2);
+    border: 0;
+}
+#a-card {
+    color: inherit;
+    text-decoration: none;
+}
+
+#a-card:hover{
+    color: inherit; 
+    text-decoration:none; 
+    cursor:pointer;  
+}
+.card-img-top{
+    height: 200px;
+    background-position: center center;
+    background-repeat: no-repeat;
+    overflow: hidden;
+
+}
+#user_pic{
+    width: 100px;
+    height: 100px;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+.tags{
+    text-transform: uppercase;
+    margin-left: 20px;
+    text-align: center;
+    width: 100px;
+    background-color: #ffb300;
+    color: #000;
+    padding: 10px 20px;
+    border-radius: 5px;
+
+}
+
+.online_icon{
+    position: absolute;
+    height: 15px;
+    width:15px;
+    background-color: #4cd137;
+    border-radius: 50%;
+    bottom: 0.2em;
+    right: 0.4em;
+    border:1.5px solid white;
+}
+.offline{
+    background-color: #c23616 !important;
+}
+.user_info{
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: 15px;
+}
+.user_info span{
+    font-size: 20px;
+    color: #000;
+}
+.user_info p{
+    font-size: 15px;
+    color: rgba(100, 100, 100, 0.6);
+}
+.last-seen{
+    font-size: 15px;
+    color: rgb(172, 172, 172);
+}
+
+.status-circle-offline {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: grey;
+    border: 2px solid white;
+    margin: 10px;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+  }
+  .status-circle-online {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: rgb(7, 196, 45);
+    border: 2px solid white;
+    margin: 10px;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+  }
+.img-wrap {
+  position: relative;
+}
+
+/* Chat */
+
+#chat {
+    min-height: 100vh;
+  }
+  
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    width: 5px;
+    background: #f5f5f5;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    width: 1em;
+    background-color: #ddd;
+    outline: 1px solid slategrey;
+    border-radius: 1rem;
+  }
+  
+  .text-small {
+    font-size: 0.9rem;
+  }
+  
+  .messages-box,
+  .chat-box {
+    height: 510px;
+    overflow-y: scroll;
+  }
+  
+  .rounded-lg {
+    border-radius: 0.5rem;
+  }
+  
+  input::placeholder {
+    font-size: 0.9rem;
+    color: #999;
+  }
+  
+  .card_profile{
+    border: none;
+    border-radius: 15px;
+    background-color: #fff;
+    position: relative;
+    height: 350px;
+   }
+   .upper{
+
+    height: 200px;
+
+   }
+   .upper img{
+    width: 100%;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+
+   }
+
+   .user{
+    position: relative;
+   }
+
+   .profile img{
+    height: 200px;
+    width: 200px;
+
+    border:5px solid #fff;  
+   
+   }
+
+   .profile{
+    position: absolute;
+    top:-100px;
+    left: 10px;
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+
+   }

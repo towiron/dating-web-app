@@ -81,7 +81,7 @@ def user_account(request):
 			u_form.save()
 			p_form.save()
 			messages.success(request, f'Your account has been updated!')
-			return redirect('user_app:user_account') # Redirect back to profile page
+			return redirect('user_app:user_account') # Перенаправление на страницу профиля пользователя
 
 	else:
 		u_form = UserUpdateForm(instance=request.user)

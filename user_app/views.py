@@ -66,7 +66,7 @@ def logout_user(request):
 	"""Выход пользователя из системы"""
 	if request.method == 'POST':
 		logout(request)
-		return redirect('dating_app:dating')
+		return redirect('user_app:signin')
 
 
 @login_required

@@ -5,17 +5,15 @@ from .models import Profile
 
 
 class UserRegisterForm(UserCreationForm):
-    email = forms.EmailField()
     class Meta:
         model = User
-        fields = ['username', 'email', 'password1', 'password2']
+        fields = ['username', 'password1', 'password2']
 
 # Создание формы UserUpdateForm для обновления имени пользователя и электронной почты
 class UserUpdateForm(forms.ModelForm):
-    email = forms.EmailField()
     class Meta:
         model = User
-        fields = ['username', 'email']
+        fields = ['username']
 
 # Создание формы ProfileUpdateForm для добавление/обноваление данных
 class ProfileUpdateForm(forms.ModelForm):

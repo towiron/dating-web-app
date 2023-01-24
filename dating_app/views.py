@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from datetime import datetime
@@ -14,5 +14,10 @@ def dating(request):
 
 @login_required
 def partner_account(request, user_id):
+	"""Показ деталей профилья других пользователей"""
 	partner_account = get_object_or_404(User, pk=user_id)
 	return render(request, 'dating_app/partner_account.html', {'partner_account':partner_account})
+
+
+def home(request):
+	return redirect('dating_app:dating')

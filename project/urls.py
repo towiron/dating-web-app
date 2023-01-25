@@ -10,6 +10,7 @@ urlpatterns = [
     path('dating/', include('dating_app.urls')), # Основная страница
     path('', views.home, name='home'), # Корневой страница которая редиректиться на dating/
     path('', include('user_app.urls')), # Авторизация
+    path('chat/', include('chat_app.urls')), # Чат
 ]
 
 if settings.DEBUG:

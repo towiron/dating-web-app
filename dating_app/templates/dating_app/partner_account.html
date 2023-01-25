@@ -32,10 +32,13 @@
                   <p class="mb-1 h5">0</p>
                   <p class="small text-muted mb-0">Likes</p>
                 </div>
-              </div>
-                <h5 class="mt-5">{{ partner_account.username }}, {{ partner_account.profile.age }}</h5>
+              </div>{% if partner_account.profile.first_name is None %}
+                      <h5 class="mt-5">{{ partner_account.username }}, {{ partner_account.profile.age }}</h5>
+                    {% else %}  
+                      <h5 class="mt-5">{{ partner_account.profile.first_name }}, {{ partner_account.profile.age }}</h5>
+                    {% endif %}
                 <p style="font-weight: 100;">{{ partner_account.profile.city }}</p>
-                <a href="#" class="btn btn-outline-primary">Send message</a>
+                <a href="{% url 'chat_app:inbox' partner_account %}" class="btn btn-outline-primary">Send message</a>
             </div>
           </div>
         </div>

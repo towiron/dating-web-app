@@ -9,12 +9,13 @@
 
     <!--Bootstrap CSS-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" href="{% static "dating_app/custom.css" %}">
+    <link rel="stylesheet" href="{% static "dating_app/custom.css" %}">    
     <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;700&display=swap" rel="stylesheet">
     <title>Calambug</title>
 
 </head>
 <body>
+<div id="chat">
     <nav id="topNav" class="navbar navbar-expand-md navbar-light">
         <div class="container">
         <a class="navbar-brand" href="{% url 'dating_app:dating' %}">
@@ -25,27 +26,54 @@
         </button>
         <div class="collapse navbar-collapse text-center" id="navbarNav">
           <ul class="navbar-nav ml-auto">
-            {% if user.is_authenticated %}
             <li class="nav-item">
+              {% if user.is_authenticated %}
                 <a class="nav-link" href="{% url 'chat_app:message_list' %}">Chat</a>
+              {% endif %}
             </li>
             <li>
-                <a class="nav-link" href="{% url 'user_app:user_account' %}"><b>My account</b></a>
+                <a class="nav-link" href="{% url 'user_app:user_account' %}"><b>My account</b></a>          
             </li>
-            {% endif %}
           </ul>
         </div>
       </div>
     </nav>
     <div class="container">
         <hr>
-        {% block content %}{% endblock %}
-    </div>
+    <div class="container py-5 px-4">
+        <div class="row rounded-lg overflow-hidden shadow">
+          <!-- Users box-->
+          <div class="col-5 px-0">
+            <div class="bg-white">
+      
+              <div class="d-flex justify-content-between bg-gray px-4 py-2 bg-light">
+                <a href="{% url 'chat_app:message_list' %}" class="h5 mb-0 py-1" style="color: #000;">Recent</a>
+              </div>
+      
+              <div class="messages-box">
+                <div class="list-group rounded-0">
+                    {% block contacts %}
+					{% endblock%}
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Chat Box-->
+          <div class="col-7 px-0">
+            <div class="px-4 py-5 chat-box">
+                
+                {% block message %}
+				{% endblock %}
+          </div>
+        </div>
+      </div>    
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    </div>
+</div>
   </body>
   </html>

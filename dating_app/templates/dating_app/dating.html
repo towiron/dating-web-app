@@ -5,9 +5,11 @@
 {% block content %}
 {% if user.profile.sex is None or user.profile.seeking is None%}
     <div class="container text-center">
-    <h2>Fill out your<a href="{% url 'user_app:user_account' %}">account</a> to increase your chances of finding a partner</h2>
+    <p class="alert alert-warning">Fill out your <a href="{% url 'user_app:user_account' %}">account</a> to increase your chances of finding a partner</p>
     </div>
 {% endif %}
+<h6 class="text-center">All users</h6>
+<hr>
 <div class="row g-2">
 {% for user_profile in profiles %}
 {% if user.username == user_profile.username %}
@@ -25,7 +27,11 @@
 	  </div>
 	  <div class="card-body">
 		<p class="card-text">
-			<img src="{% static 'user_profile/male.png' %}" style="height: 1rem;" alt="">
+			{% if user_profile.profile.sex == male  %}
+				<img src="{% static 'user_app/male.png' %}" style="height: 1rem;" alt="">
+			{% elif user_profile.profile.sex == Female %}
+				<img src="{% static 'user_app/female.png' %}" style="height: 1rem;" alt="">
+			{% endif %}
 			{% if user_profile.profile.first_name is not None %}
 			  <b>{{ user_profile.profile.first_name }}, {{ user_profile.profile.age }}</b>
 			{% else %}  

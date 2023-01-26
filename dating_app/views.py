@@ -21,3 +21,9 @@ def partner_account(request, user_id):
 
 def home(request):
 	return redirect('dating_app:dating')
+
+
+def search_results(request):
+	search = str(request.GET.get('search'))
+	profiles = User.objects.order_by('-last_login')
+	return render(request, 'dating_app/search_results.html', {'search': search, 'profiles':profiles})

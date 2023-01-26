@@ -33,10 +33,20 @@
 				<img src="{% static 'user_app/female.png' %}" style="height: 1rem;" alt="">
 			{% endif %}
 			{% if user_profile.profile.first_name is not None %}
-			  <b>{{ user_profile.profile.first_name }}, {{ user_profile.profile.age }}</b>
-			{% else %}  
-			  <b>{{ user_profile.username }}, {{ user_profile.profile.age }}</b>
-			{% endif %}
+				<b>{{ user_profile.profile.first_name }}
+					{% if user_profile.profile.age is None %}
+					{% else %}
+					{{ user_profile.profile.age }}
+					{% endif %}
+				  </b>
+				{% else %}  
+				  <b>{{ user_profile.username }}
+					{% if user_profile.profile.age is None %}
+					{% else %}
+					{{ user_profile.profile.age }}
+					{% endif %}
+				  </b>
+				{% endif %}
 		  {% if user_profile.profile.online_status == False %}  
 		  <p class="last-seen">Last seen: {{ user_profile.last_login|date:"SHORT_DATE_FORMAT"}} <br>at {{ user_profile.last_login|time:"h:i a" }}</p>
 		  {% endif %}

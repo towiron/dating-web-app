@@ -15,8 +15,6 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-DEBUG = False
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -26,8 +24,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # Debug
-    # 'debug_toolbar',
     # Apps
     'chat_app',
     'dating_app',
@@ -37,17 +33,16 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    
+    'whitenoise.middleware.WhiteNoiseMiddleware', # для подгрузки статики
+
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
-    # 'debug_toolbar.middleware.DebugToolbarMiddleware', # Debug
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-# INTERNAL_IPS = [
-#     "127.0.0.1",
-# ]
 
 ROOT_URLCONF = 'project.urls'
 
@@ -68,6 +63,17 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'project.wsgi.application'
+
+
+# Database
+# https://docs.djangoproject.com/en/4.1/ref/settings/#databases
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
 
 
 # Password validation
@@ -104,11 +110,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
+STATIC_URL = 'static/'
+STATICFILES_DIRS = [BASE_DIR / "static"]
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+STATIC_ROOT = BASE_DIR / "staticfiles"
 
-
-
-STATIC_URL = '/static/'
-STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
 # Media
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media/'

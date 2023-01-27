@@ -4,3 +4,4 @@ django-crispy-forms==1.14.0
 django_debug_toolbar==3.8.1
 Pillow==9.4.0
 sqlparse==0.4.3
+whitenoise==6.3.0

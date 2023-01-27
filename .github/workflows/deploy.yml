@@ -36,17 +36,16 @@ jobs:
           
           # sftp args
           args: '-o ConnectTimeout=5'
-      - name: activate venv and collectstatic
-        run: |
-          echo 0. cd ~
-          cd ~
-          echo 1. RUN VENV
-          source venv/bin/activate
-          echo 2. GO TO THE PROJECT PATH
-          cd dating-web-app/
-          echo 3. COLLECTSTATIC
-          pip3 manage.py collectstatic
-          echo 4. RESTART SUPERVISOR
-          sudo supervisorctl restart dating
-          ${{ secrets.PASSWORD }}
-          echo DONE
+          run: |
+            echo 0. cd ~
+            cd ~
+            echo 1. RUN VENV
+            source venv/bin/activate
+            echo 2. GO TO THE PROJECT PATH
+            cd dating-web-app/
+            echo 3. COLLECTSTATIC
+            pip3 manage.py collectstatic
+            echo 4. RESTART SUPERVISOR
+            sudo supervisorctl restart dating
+            ${{ secrets.PASSWORD }}
+            echo DONE

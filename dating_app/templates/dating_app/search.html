@@ -8,7 +8,7 @@
     <p class="alert alert-warning">Fill out your <a href="{% url 'user_app:user_account' %}">account</a> to increase your chances of finding a partner</p>
     </div>
 {% endif %}
-<h6 class="text-center">All users</h6>
+<h6 class="text-center">{{ query }}</h6>
 <hr>
 <div class="row g-2">
 {% if profiles %}
@@ -16,8 +16,8 @@
 <a href="{% url 'dating_app:partner_account' profile.id %}" id="a-card">
 	<div class="card m-2" style="width: 13.2rem;">
 	  <div class="img-wrap">
-	  <img src="{{ profile.profile.profile_pic.url }}" class="card-img-top" style="object-fit: cover; object-position: center;" alt="...">
-		{% if profile.profile.online_status %}  
+	  <img src="{{ profile.profile_pic.url }}" class="card-img-top" style="object-fit: cover; object-position: center;" alt="...">
+		{% if profile.online_status %}  
 		  <div class="status-circle-online"></div>
 		{% else %}
 		  <div class="status-circle-offline"></div>
@@ -29,20 +29,21 @@
 				<img src="{% static 'user_app/male.png' %}" style="height: 1rem;" alt="">
 			{% elif profile.profile.sex == Female %}
 				<img src="{% static 'user_app/female.png' %}" style="height: 1rem;" alt="">
-			{% endif %}			
-				<b>{{ profile.profile.first_name }}
-					{% if profile.profile.age is None %}
+			{% endif %}
+				<b>{{ profile.first_name }}
+					{% if profile.age is None %}
 					{% else %}
-					{{ profile.profile.age }}
+					{{ profile.age }}
 					{% endif %}
 				  </b>
 		  </p>
-		<p>{{ profile.profile.about|truncatechars:80 }}</p>
+		<p>{{ profile.about|truncatechars:80 }}</p>
 	  </div>
 	</div>
 	</a>
 {% endfor %}
 {% endif %}
+{% if  profiles %}
 </div>
 <ul class="pagination justify-content-center flex-wrap mt-2 mb-4">
     {% if profiles.has_previous %}
@@ -68,4 +69,5 @@
         <li class="disabled page-item"><span class="page-link">&raquo;</span></li>
     {% endif %}
 </ul>
+{% endif %}
 {% endblock %}

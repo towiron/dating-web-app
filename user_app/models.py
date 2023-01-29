@@ -36,7 +36,7 @@ class Profile(models.Model):
     city = models.CharField(max_length=255, null=True, blank=True)
     online_status = models.BooleanField(null=True, blank=True, default=False)
     def __str__(self):
-        return f'{self.user.username} Profile'
+        return self.user.username
     def save(self, *args, **kwargs):
         super(Profile, self).save(*args, **kwargs)
 

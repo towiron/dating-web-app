@@ -12,7 +12,7 @@ from django.views.generic import ListView, DetailView
 @login_required
 def dating(request):
 	"""Домашняя страница"""
-	profiles_list = User.objects.all()
+	profiles_list = User.objects.order_by('-last_login')
 	profiles_list = User.objects.exclude(id=request.user.id)
 	contex = get_pogination(request, profiles_list, 10)
 	date_now = datetime.now()
@@ -39,7 +39,8 @@ def search_results(request):
 	
 	profiles_list = Profile.objects.filter(
             Q(first_name__icontains=query) | Q(last_name__icontains=query)
-        )
+        ).exclude(id=request.user.id)
+
 	contex = get_pogination(request, profiles_list, 10)
 	if profiles_list:
 		contex.update({'query': f'We found {len(profiles_list)} people with name "{query}"'})
@@ -50,7 +51,7 @@ def search_results(request):
 
 def get_pogination(request, profiles_list, objects_num):
 	"""Пагинация"""
-	paginator = Paginator(profiles_list.order_by('-last_login'), objects_num)
+	paginator = Paginator(profiles_list, objects_num)
 	try:
 		page = int(request.GET.get('page', '1'))
 	except:

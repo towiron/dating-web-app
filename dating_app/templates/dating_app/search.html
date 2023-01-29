@@ -13,6 +13,9 @@
 <div class="row g-2">
 {% if profiles %}
 {% for profile in profiles %}
+{% if user.username == profile.user.username %}
+  <!-- continue -->
+{% else %}
 <a href="{% url 'dating_app:partner_account' profile.id %}" id="a-card">
 	<div class="card m-2" style="width: 13.2rem;">
 	  <div class="img-wrap">
@@ -41,6 +44,7 @@
 	  </div>
 	</div>
 	</a>
+{% endif %}
 {% endfor %}
 {% endif %}
 {% if  profiles %}

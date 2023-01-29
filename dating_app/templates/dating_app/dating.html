@@ -11,15 +11,16 @@
 <h6 class="text-center">All users</h6>
 <hr>
 <div class="row g-2">
-{% for user_profile in profiles %}
-{% if user.username == user_profile.username %}
+{% if profiles %}
+{% for profile in profiles %}
+{% if user.username == profile.username %}
   <!-- continue -->
 {% else %}
-<a href="{% url 'dating_app:partner_account' user_profile.id %}" id="a-card">
+<a href="{% url 'dating_app:partner_account' profile.id %}" id="a-card">
 	<div class="card m-2" style="width: 13.2rem;">
 	  <div class="img-wrap">
-	  <img src="{{ user_profile.profile.profile_pic.url }}" class="card-img-top" style="object-fit: cover; object-position: center;" alt="...">
-		{% if user_profile.profile.online_status %}  
+	  <img src="{{ profile.profile.profile_pic.url }}" class="card-img-top" style="object-fit: cover; object-position: center;" alt="...">
+		{% if profile.profile.online_status %}  
 		  <div class="status-circle-online"></div>
 		{% else %}
 		  <div class="status-circle-offline"></div>
@@ -27,35 +28,60 @@
 	  </div>
 	  <div class="card-body">
 		<p class="card-text">
-			{% if user_profile.profile.sex == male  %}
+			{% if profile.profile.sex == male  %}
 				<img src="{% static 'user_app/male.png' %}" style="height: 1rem;" alt="">
-			{% elif user_profile.profile.sex == Female %}
+			{% elif profile.profile.sex == Female %}
 				<img src="{% static 'user_app/female.png' %}" style="height: 1rem;" alt="">
 			{% endif %}
-			{% if user_profile.profile.first_name is not None %}
-				<b>{{ user_profile.profile.first_name }}
-					{% if user_profile.profile.age is None %}
+			{% if profile.profile.first_name is not None %}
+				<b>{{ profile.profile.first_name }}
+					{% if profile.profile.age is None %}
 					{% else %}
-					{{ user_profile.profile.age }}
+					{{ profile.profile.age }}
 					{% endif %}
 				  </b>
 				{% else %}  
-				  <b>{{ user_profile.username }}
-					{% if user_profile.profile.age is None %}
+				  <b>{{ profile.username }}
+					{% if profile.profile.age is None %}
 					{% else %}
-					{{ user_profile.profile.age }}
+					{{ profile.profile.age }}
 					{% endif %}
 				  </b>
 				{% endif %}
-		  {% if user_profile.profile.online_status == False %}  
-		  <p class="last-seen">Last seen: {{ user_profile.last_login|date:"SHORT_DATE_FORMAT"}} <br>at {{ user_profile.last_login|time:"h:i a" }}</p>
+		  {% if profile.profile.online_status == False %}  
+		  <p class="last-seen">Last seen: {{ profile.last_login|date:"SHORT_DATE_FORMAT"}} <br>at {{ profile.last_login|time:"h:i a" }}</p>
 		  {% endif %}
 		  </p>
-		<p>{{ user_profile.profile.about|truncatechars:80 }}</p>
+		<p>{{ profile.profile.about|truncatechars:80 }}</p>
 	  </div>
 	</div>
 	</a>
 {% endif %}
 {% endfor %}
+{% endif %}
 </div>
+<ul class="pagination justify-content-center flex-wrap mt-2 mb-4">
+    {% if profiles.has_previous %}
+        <li class="page-item"><a class="page-link" href="?page={{ profiles.previous_page_number }}">&laquo;</a></li>
+    {% else %}
+        <li class="disabled page-item"><span class="page-link">&laquo;</span></li>
+    {% endif %}
+    {% for i in page_range|default_if_none:profiles.paginator.get_elided_page_range %}
+        {% if profiles.number == i %}
+            <li class="active page-item"><span class="page-link">{{ i }} <span class="sr-only">(current)</span></span>
+            </li>
+        {% else %}
+            {% if i == profiles.paginator.ELLIPSIS %}
+                <li class="page-item"><span class="page-link">{{ i }}</span></li>
+            {% else %}
+                <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+    {% if profiles.has_next %}
+        <li class="page-item"><a class="page-link" href="?page={{ profiles.next_page_number }}">&raquo;</a></li>
+    {% else %}
+        <li class="disabled page-item"><span class="page-link">&raquo;</span></li>
+    {% endif %}
+</ul>
 {% endblock %}

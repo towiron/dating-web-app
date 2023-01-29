@@ -6,7 +6,7 @@ from django.conf.urls.static import static
 from dating_app import views
 
 urlpatterns = [
-    # path('__debug__/', include('debug_toolbar.urls')),
+    path('__debug__/', include('debug_toolbar.urls')),
 
     path('admin/', admin.site.urls),
     path('dating/', include('dating_app.urls')), # Основная страница

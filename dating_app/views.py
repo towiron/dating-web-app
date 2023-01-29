@@ -2,14 +2,26 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from datetime import datetime
-
+from django.core.paginator import Paginator, EmptyPage, InvalidPage
 
 @login_required
 def dating(request):
 	"""Домашняя страница"""
-	profiles = User.objects.order_by('-last_login')
+	profiles_list = User.objects.all().order_by('-last_login')
+	paginator = Paginator(profiles_list, 10)
+	try:
+		page = int(request.GET.get('page', '1'))
+	except:
+		page = 1
+	
+	try:
+		profiles = paginator.page(page)
+	except(EmptyPage, InvalidPage):
+		profiles = paginator.page(paginator.num_pages)
+	page_range = paginator.get_elided_page_range(number=page)
+
 	date_now = datetime.now()
-	return render(request, 'dating_app/dating.html', {'profiles':profiles, 'date_now':date_now})
+	return render(request, 'dating_app/dating.html', {'profiles':profiles, 'page_range': page_range, 'date_now':date_now})
 
 
 @login_required

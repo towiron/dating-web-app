@@ -16,14 +16,17 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # Application definition
+THIRD_PARTY_APPS = ["django_countries", "django_seed"]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
+    "debug_toolbar",
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_seed', # DJANGO seed for fake DB
     # Apps
     'chat_app',
     'dating_app',
@@ -33,7 +36,8 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
+
     'whitenoise.middleware.WhiteNoiseMiddleware', # для подгрузки статики
 
     'django.contrib.sessions.middleware.SessionMiddleware',

@@ -2,12 +2,11 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
-from .models import UserCreateForm
 from django.contrib.auth.models import User
 from django.db import IntegrityError
 from .forms import UserUpdateForm, ProfileUpdateForm
 from django.contrib import messages
-
+from django.contrib.auth.forms import UserCreationForm
 
 
 
@@ -17,7 +16,7 @@ def signup(request):
 		return redirect('dating_app:dating')
 	else:
 		if request.method == 'GET':
-			return render(request, 'user_app/signup.html', {'form': UserCreateForm()})
+			return render(request, 'user_app/signup.html', {'form': UserCreationForm()})
 		else:
 			if request.POST['password1'] == request.POST['password2']:
 				try:
@@ -29,15 +28,15 @@ def signup(request):
 				# Отлов ошибок
 				except IntegrityError:
 					return render(request, 'user_app/signup.html',
-								{'form': UserCreateForm(),
+								{'form': UserCreationForm(),
 								'error': 'That username has already been taken'})
 				except ValueError:
 					return render(request, 'user_app/signup.html',
-								{'form': UserCreateForm(),
+								{'form': UserCreationForm(),
 								'error': 'Need to fill in all the fields'})
 			else:
 				return render(request, 'user_app/signup.html',
-							{'form': UserCreateForm(),
+							{'form': UserCreationForm(),
 							'error': 'Password did not match'})
 
 

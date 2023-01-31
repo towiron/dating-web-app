@@ -9,35 +9,54 @@ from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
 
 
+def auth_user(request):
+	return render(request, 'user_app/auth_user.html')
+
 
 def signup(request):
 	"""Регистрация пользователя"""
-	if request.user.is_authenticated:
-		return redirect('dating_app:dating')
-	else:
-		if request.method == 'GET':
-			return render(request, 'user_app/signup.html', {'form': UserCreationForm()})
-		else:
-			if request.POST['password1'] == request.POST['password2']:
-				try:
-					user = User.objects.create_user(username = request.POST['username'],
-													password=request.POST['password1'])
-					user.save()
-					login(request, user)
-					return redirect('dating_app:dating')
-				# Отлов ошибок
-				except IntegrityError:
-					return render(request, 'user_app/signup.html',
+	if request.method == "POST":
+		form = UserCreationForm(request.POST)
+		if form.is_valid():
+			user = form.save()
+			login(request, user)
+			messages.success(request, "Registration successful." )
+			return redirect("dating_app:dating")
+		return render(request, 'user_app/auth_user.html',
 								{'form': UserCreationForm(),
-								'error': 'That username has already been taken'})
-				except ValueError:
-					return render(request, 'user_app/signup.html',
-								{'form': UserCreationForm(),
-								'error': 'Need to fill in all the fields'})
-			else:
-				return render(request, 'user_app/signup.html',
-							{'form': UserCreationForm(),
-							'error': 'Password did not match'})
+								'error': 'Unsuccessful registration. Invalid information.'})
+	form = UserCreationForm()
+	return render(request, 'user_app/auth_user.html', {'form': UserCreationForm()})
+
+			
+
+
+	# if request.user.is_authenticated:
+	# 	return redirect('dating_app:dating')
+	# else:
+	# 	if request.method == 'GET':
+	# 		return render(request, 'user_app/signup.html', {'form': UserCreationForm()})
+	# 	else:
+	# 		if request.POST['password1'] == request.POST['password2']:
+	# 			try:
+	# 				user = User.objects.create_user(username = request.POST['username'],
+	# 												password=request.POST['password1'])
+	# 				user.save()
+	# 				login(request, user)
+	# 				return redirect('dating_app:dating')
+	# 			# Отлов ошибок
+	# 			except IntegrityError:
+	# 				return render(request, 'user_app/signup.html',
+	# 							{'form': UserCreationForm(),
+	# 							'error': 'That username has already been taken'})
+	# 			except ValueError:
+	# 				return render(request, 'user_app/signup.html',
+	# 							{'form': UserCreationForm(),
+	# 							'error': 'Need to fill in all the fields'})
+	# 		else:
+	# 			return render(request, 'user_app/signup.html',
+	# 						{'form': UserCreationForm(),
+	# 						'error': 'Password did not match'})
 
 
 def signin(request):
@@ -46,15 +65,15 @@ def signin(request):
 		return redirect('dating_app:dating')
 	else:
 		if request.method == 'GET':
-			return render(request, 'user_app/signin.html',
+			return render(request, 'user_app/auth_user.html',
 										{'form': AuthenticationForm()})
 		else:
 			user = authenticate(request,username=request.POST['username'],
 										password=request.POST['password'])
 			if user is None:
-				return render(request, 'user_app/signin.html',
+				return render(request, 'user_app/auth_user.html',
 							{'form': AuthenticationForm(),
-							'error':'Username or password did not match'})
+							'error_signin':'Username or password did not match'})
 			else:
 				login(request, user)
 				return redirect('dating_app:dating')

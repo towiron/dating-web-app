@@ -255,3 +255,30 @@ footer a {
     color: #3c97bf;
     text-decoration: none;
 }
+
+
+/* suppress IE >= 10 native functionality that can show password */
+input[type="password"]::-ms-reveal {
+	display: none;
+  }
+  .btn {
+	margin-top: 1.75em;
+  }
+  .input-group {
+	position: relative;
+	width: 100%;
+  }
+  .toggle {
+	background: none;
+	border: none;
+	color: #337ab7;
+	/*display: none;*/
+	/*font-size: .9em;*/
+	font-weight: 600;
+	/*padding: .5em;*/
+	position: absolute;
+	right: .75em;
+	top: 2.25em;
+	z-index: 9;
+  }
+  

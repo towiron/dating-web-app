@@ -24,7 +24,7 @@ class Profile(models.Model):
         MALE = 'M', ('Male')
         FEMALE = 'F', ('Female')
 
-    user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     first_name = models.CharField(max_length=20, null=True, blank=True)
     last_name = models.CharField(max_length=30, null=True, blank=True)
     profile_pic = models.ImageField(default='ava.jpg', upload_to=user_directory_path, blank=True)

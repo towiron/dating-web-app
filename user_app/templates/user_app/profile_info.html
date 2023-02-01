@@ -1,0 +1,84 @@
+{% extends "dating_app/base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'styles/profile_info.css' %}">
+<!-- bootstrap css -->
+
+<!-- google font -->
+<div class="container">
+    <form id="signUpForm" method="POST" enctype="multipart/form-data">
+		{% csrf_token %}
+        <!-- start step indicators -->
+        <div class="form-header d-flex mb-4">
+            <span class="stepIndicator"></span>
+            <span class="stepIndicator"></span>
+            <span class="stepIndicator"></span>
+        </div>
+        <!-- end step indicators -->
+    
+        <!-- step one -->
+        <div class="step">
+            <p class="text-center mb-4">STEP 1/3</p>
+            <div class="mb-3">
+                <input type="text" placeholder="First name" oninput="this.className = ''" name="first_name" id="id_first_name">
+            </div>
+            <div class="mb-3">
+                <input type="text" placeholder="Last name" oninput="this.className = ''" name="last_name" id="id_last_name">
+            </div>
+            <div class="mb-3">
+                <input type="number" name="age" placeholder="Age" id="id_age" min="18">
+            </div>
+        </div>
+    
+        <!-- step two -->
+        <div class="step">
+            <p class="text-center mb-4">STEP 2/3</p>
+            <div class="mb-3">
+                <input type="text" name="city" id="id_city" placeholder="Your country and city">
+            </div>
+            <div class="input-group mb-3">
+				<div class="input-group-prepend">
+				  <label class="input-group-text" for="id_sex">I'm a</label>
+				</div>
+				<select class="custom-select" name="sex" id="id_sex">
+					<option value="M" selected="selected">Male</option>
+					<option value="F">Female</option>
+				</select>
+			  </div>
+			  <div class="input-group mb-3">
+				<div class="input-group-prepend">
+				  <label class="input-group-text" for="id_seeking">Seeking a</label>
+				</div>
+				<select class="custom-select" name="seeking" id="id_seeking">
+					<option value="M" selected="selected">Male</option>
+					<option value="F">Female</option>
+				</select>
+			  </div>
+        </div>
+    
+        <!-- step three -->
+        <div class="step">
+            <p class="text-center mb-4">STEP 3/3</p>
+			<div class="text-center">
+			<img src="{{ user.profile.profile_pic.url }}" style="object-fit: cover; object-position: center; height: 200px; width: 200px; margin-bottom: 20px;" class="rounded-circle" id="image">
+			</div>
+			<div class="profile-pic">
+			  <input type="file" name="profile_pic" accept="image/*" id="id_profile_pic" onchange="loadFile(event)"/>
+			  </div>
+			  <textarea class="form-control" name="about" cols="40" rows="10" style="width: 100%; margin-top: 20px; margin-bottom: 20px;" id="id_about" placeholder="About you"></textarea>
+        </div>
+    
+        <!-- start previous / next buttons -->
+        <div class="form-footer d-flex">
+            <button type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
+            <button type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>
+        </div>
+        <!-- end previous / next buttons -->
+		<!-- {{ p_form|crispy }}
+		Profile form -->
+    </form>
+</div>
+<script src="{% static 'scripts/profile_info.js' %}"></script>
+{% endblock %}

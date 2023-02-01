@@ -27,6 +27,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # 'django_seed', # DJANGO seed for fake DB
+    'django_extensions',
+
     # Apps
     'chat_app',
     'dating_app',

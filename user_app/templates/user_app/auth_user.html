@@ -11,9 +11,10 @@
             {% csrf_token %}
 			<h1>Find your<br>
                 true l<span><img src="{% static 'user_app/heart.png' %}" style="align-items: center; height: 25px; margin-top: -15px;"></span>ve</h1>
-            {% if error_signup %}
+				<br>
+            {% if error %}
                 <div class="alert alert-danger" role="alert">
-                    {{ error_signup }}
+                    {{ error }}
                 </div>
             {% endif %}
 			<input type="text" placeholder="Login" name="username" id="username"/>

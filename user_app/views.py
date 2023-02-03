@@ -21,20 +21,26 @@ def signup(request):
 	if request.method == 'GET':
 		return render(request, 'user_app/auth_user.html', {'form': UserCreationForm})
 	else:
-		if request.POST['password1'] == request.POST['password2']:
-			if len(request.POST['password1']) > 8 and len(request.POST['username']) > 5 and str(request.POST['username']).isalnum():
-				try:
-					user = User.objects.create_user(username = request.POST['username'], password=request.POST['password1'])
-					user.save()
-					login(request, user)
-					return redirect('user_app:profile_info')
-				except IntegrityError:
-					return render(request, 'user_app/auth_user.html', {'form': UserCreationForm(), 'error_signup': '*That username has already been taken'})
-			else:
-				return render(request, 'user_app/auth_user.html', {'form': UserCreationForm(),
-				'error_signup': '*Your password must contain at least 8 characters login at least 5 characters with contain letters and numbers'})
+		if not(request.POST['username']):
+			return render(request, 'user_app/auth_user.html', {'form':UserCreationForm(), 'error':'Login can\'t be empty'})
+		elif not(request.POST['password1']):
+			return render(request, 'user_app/auth_user.html', {'form':UserCreationForm(), 'error':'Password can\'t be empty'})
+		elif not(request.POST['password2']):
+			return render(request, 'user_app/auth_user.html', {'form':UserCreationForm(), 'error':'Confirm Password can\'t be empty'})
+		elif request.POST['password1'] != request.POST['password2']:
+			return render(request, 'user_app/auth_user.html', {'form':UserCreationForm(), 'error':'Password did not match'})
+		elif len(request.POST['password1']) < 8:
+			return render(request, 'user_app/auth_user.html', {'form':UserCreationForm(), 'error':'Password less then 8 characters'})
+		elif len(request.POST['username']) < 5:
+			return render(request, 'user_app/auth_user.html', {'form':UserCreationForm(), 'error':'Login less then 5 characters'})
 		else:
-			return render(request, 'user_app/auth_user.html', {'form': UserCreationForm(), 'error_signup': '*Password did not match'})
+			try:
+				user = User.objects.create_user(username = request.POST['username'], password=request.POST['password1'])
+				user.save()
+				login(request, user)
+				return redirect('user_app:profile_info')
+			except IntegrityError:
+					return render(request, 'user_app/auth_user.html', {'form': UserCreationForm(), 'error': '*That username has already been taken'})	
 
 @login_required		
 def profile_info(request):

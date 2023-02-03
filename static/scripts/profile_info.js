@@ -1,3 +1,6 @@
+
+
+// Пошаговая форма заполениния профиля
 var currentTab = 0; // Current tab is set to be the first tab (0)
         showTab(currentTab); // Display the current tab
         
@@ -75,3 +78,26 @@ var loadFile = function (event) {
   var image = document.getElementById("image");
   image.src = URL.createObjectURL(event.target.files[0]);
 };
+
+// Ограничение размера загружаемого файла
+let fileInput = document.getElementById("id_profile_pic");
+let fileResult = document.getElementById("file-result");
+let fileSubmit = document.getElementById("nextBtn")
+
+fileInput.addEventListener("change", function () {
+  if (fileInput.files.length > 0) {
+    const fileSize = fileInput.files.item(0).size;
+    const fileMb = fileSize / 1024 ** 2;
+    if (fileMb >= 2) {
+      fileResult.className = "alert alert-danger"
+      fileResult.innerHTML = "Please select a file less than 2MB.";
+      fileSubmit.disabled = true;
+    } else {
+      fileResult.className = "alert alert-success "
+      fileResult.innerHTML = "Success, your file is " + fileMb.toFixed(1) + "MB."; 
+      document.getElementById("nextBtn").disabled = false;
+    }
+  }
+});
+
+

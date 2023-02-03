@@ -8,7 +8,7 @@
 
 <!-- google font -->
 <div class="container">
-    <form id="signUpForm" method="POST" enctype="multipart/form-data">
+    <form id="signUpForm" name="signUpForm" method="POST" enctype="multipart/form-data">
 		{% csrf_token %}
         <!-- start step indicators -->
         <div class="form-header d-flex mb-4">
@@ -22,13 +22,13 @@
         <div class="step">
             <p class="text-center mb-4">STEP 1/3</p>
             <div class="mb-3">
-                <input type="text" placeholder="First name" oninput="this.className = ''" name="first_name" id="id_first_name">
+                <input type="text" placeholder="First name" oninput="this.className = ''" name="first_name" id="id_first_name" autocomplete="off">
             </div>
             <div class="mb-3">
-                <input type="text" placeholder="Last name" oninput="this.className = ''" name="last_name" id="id_last_name">
+                <input type="text" placeholder="Last name" oninput="this.className = ''" name="last_name" id="id_last_name" autocomplete="off">
             </div>
             <div class="mb-3">
-                <input type="number" name="age" placeholder="Age" id="id_age" min="18">
+                <input type="number" name="age" placeholder="Age" id="id_age" min="18" max="99" pattern="[0-9]{3}"  autocomplete="off">
             </div>
         </div>
     
@@ -36,7 +36,7 @@
         <div class="step">
             <p class="text-center mb-4">STEP 2/3</p>
             <div class="mb-3">
-                <input type="text" name="city" id="id_city" placeholder="Your country and city">
+                <input type="text" name="city" id="id_city" placeholder="Your country and city" autocomplete="off">
             </div>
             <div class="input-group mb-3">
 				<div class="input-group-prepend">
@@ -64,8 +64,10 @@
 			<div class="text-center">
 			<img src="{{ user.profile.profile_pic.url }}" style="object-fit: cover; object-position: center; height: 200px; width: 200px; margin-bottom: 20px;" class="rounded-circle" id="image">
 			</div>
-			<div class="profile-pic">
+			<div class="profile-pic text-center">
+              <!-- <p class="alert alert-warning text-center">MAX FILE SIZE = 2MB</p> -->
 			  <input type="file" name="profile_pic" accept="image/*" id="id_profile_pic" onchange="loadFile(event)"/>
+              <p class="" id="file-result"></p>
 			  </div>
 			  <textarea class="form-control" name="about" cols="40" rows="10" style="width: 100%; margin-top: 20px; margin-bottom: 20px;" id="id_about" placeholder="About you"></textarea>
         </div>

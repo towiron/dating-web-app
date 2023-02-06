@@ -3,99 +3,45 @@
 {% block message %}
 
 {% if messages %}
-    <div class="container text-center" style="position: absolute; top: 0; left: 0; height: 45px; background-color: #fafafa; padding-top: 10px;">
-    <p>You are chatting with <b><a href="{% url 'dating_app:partner_account' other_person.id %}" style="color: #000;">
-      {% if other_person.profile.first_name is None %}
-        {{ other_person.username }}
-      {% else %}
-        {{ other_person.profile.first_name }}
-      {% endif %}
-    </a></b></p>
-    </div>
-    {% for message in messages %}
-        {% if message.sender == other_person %}
-        <!-- text from person -->
-              <div class="media w-50 mb-3"><img src="{{ other_person.profile.profile_pic.url }}" alt="user" width="50" class="rounded-circle">
-                <div class="media-body ml-3">
-                  <div class="bg-light py-2 px-3 mb-2"
-                  style="max-width: 300px;
-                        word-wrap: break-word;
-                        -webkit-border-radius: 10px;
-                        -webkit-border-top-left-radius: 0;
-                        -moz-border-radius: 10px;
-                        -moz-border-radius-topleft: 0;
-                        border-radius: 10px;
-                        border-top-left-radius: 0;">
-                    <p class="text-small mb-0">{{ message.message }}</p>
-                  </div>
-                  <p class="small text-muted">
-                    <time datetime="2020-01-01">
-                    {{ message.date }}
-                </time></p>
-                </div>
-              </div>
-        <!-- text from person end -->
-        {% else %}
-        <!-- text from me -->
-        <div class="media w-50 ml-auto mb-3">
-                <div class="media-body">
-                  <div class="py-2 px-3 mb-2"
-                      style="
-                      max-width: 300px;
-                      word-wrap: break-word;
-                      background-color: #8539f7;
-                      -webkit-border-radius: 10px;
-                      -webkit-border-bottom-right-radius: 0;
-                      -moz-border-radius: 10px;
-                      -moz-border-radius-bottomright: 0;
-                      border-radius: 10px;
-                      border-bottom-right-radius: 0;">
-                    <p class="text-small mb-0 text-white">{{ message.message }}</p>
-                  </div>
-                  <p class="small text-muted">
-                    <time datetime="2020-01-01">
-                    {{ message.date }}
-                </time></p>
-                </div>
-              </div>
-        <!-- text from me end -->
-        {% endif %}
-        {% endfor %}
-
-
-
-        <form action="{% url 'chat_app:inbox' other_person.username %}" method="POST" class="">
-          {% csrf_token %}
-          <footer style="bottom: 0; left: 0; right: 0; position: absolute; margin-bottom: 2px; background-color: #fff;">
-          <input type="hidden" name="recipient" value="{{ other_person.pk }}">
-          <input type="hidden" name="you" value="{{ you.pk }}">
-          <div class="input-group">
-            <input type="text" autofocus name="message" autocomplete="off" placeholder="Type a message" aria-describedby="button-addon2" class="form-control rounded-0 border-0 py-4 bg-light">
-            <div class="input-group-append">
-              <button id="button-addon2" type="submit" class="btn btn-link"><img src="{% static 'chat_app/send.png' %}" style="width: 2rem;" alt=""></button>
-            </div>
-          </div>
-          </footer>
-        </form>
-          
-
+<div class="contact-profile" style="font-weight: 500;">
+  <a href="{% url 'dating_app:partner_account' other_person.id %}">
+  <img src="{{ other_person.profile.profile_pic.url }}" alt="" />
+  <p>{{ other_person.profile.first_name }} {{ other_person.profile.last_name }}</p>
+  </a>
 </div>
-{% else %}
-    <!-- No messages yet alert -->
-    <!-- Typing area -->
-    <form action="{% url 'chat_app:inbox' other_person.username %}" method="POST" class="">
-      {% csrf_token %}
-      <footer style="bottom: 0; left: 0; right: 0; position: absolute; margin-bottom: 2px; background-color: #fff;">
-      <input type="hidden" name="recipient" value="{{ other_person.pk }}">
-      <input type="hidden" name="you" value="{{ you.pk }}">
-      <div class="input-group">
-        <input type="text" autofocus name="message" autocomplete="off" placeholder="Type a message" aria-describedby="button-addon2" class="form-control rounded-0 border-0 py-4 bg-light">
-        <div class="input-group-append">
-          <button id="button-addon2" type="submit" class="btn btn-link"><img src="{% static 'chat_app/send.png' %}" style="width: 2rem;" alt=""></button>
-        </div>
-      </div>
-      </footer>
-    </form>
+{% for message in messages %}
+    {% if message.sender == other_person %}
 
+    <ul>
+      <li class="sent">
+        <img src="{{ other_person.profile.profile_pic.url }}" alt="" />
+        <p>{{ message.message }}</p>
+      </li>
+    </ul>
+    
+    {% else %}
+
+    <ul>
+      <li class="replies">
+        <img src="{{ user.profile.profile_pic.url }}" alt="" />
+        <p>{{ message.message }}</p>
+      </li>
+    </ul>
+    {% endif %}
+{% endfor %}
 {% endif %}
+<form action="{% url 'chat_app:inbox' other_person.username %}" method="POST">
+  {% csrf_token %}
+  <input type="hidden" name="recipient" value="{{ other_person.pk }}">
+  <input type="hidden" name="user" value="{{ user.pk }}">
+<div class="message-input">
+  <div class="wrap">
+  <input type="text" autofocus name="message" autocomplete="off" placeholder="Write your message..." />
+  <button class="submit" type="submit"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-send-fill" viewBox="0 0 16 16">
+    <path d="M15.964.686a.5.5 0 0 0-.65-.65L.767 5.855H.766l-.452.18a.5.5 0 0 0-.082.887l.41.26.001.002 4.995 3.178 3.178 4.995.002.002.26.41a.5.5 0 0 0 .886-.083l6-15Zm-1.833 1.89L6.637 10.07l-.215-.338a.5.5 0 0 0-.154-.154l-.338-.215 7.494-7.494 1.178-.471-.47 1.178Z"/>
+    </svg></button>
+  </div>
+</div>
+</form>
+
 {% endblock %}

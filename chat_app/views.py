@@ -1,4 +1,4 @@
-from django.shortcuts import redirect, get_object_or_404
+from django.shortcuts import redirect, get_object_or_404, render
 from django.contrib.auth.models import User
 from .models import Message
 from django.views.generic import DetailView, ListView
@@ -28,7 +28,7 @@ class MessagesListView(LoginRequiredMixin, ListView):
 
 		context['messages_list'] = messages
 		context['other_users'] = other_users
-		context['you'] = user
+		context['user'] = user
 		return context
 
 
@@ -72,16 +72,16 @@ class InboxView(LoginRequiredMixin, DetailView):
 		context['messages'] = Message.get_all_messages(sender, recipient)  # получить все сообщения между отправителем (вами) и получателем (другим пользователем)
 		context['messages_list'] = messages # для шаблона MessagesListView
 		context['other_person'] = other_user  # узнайте имя другого человека, с которым вы общаетесь, из указанного имени пользователя
-		context['you'] = user  # отправьте свой основной ключ на POST
+		context['user'] = user  # отправьте свой основной ключ на POST
 		context['other_users'] = other_users
 
 		return context
 
     # Отправить сообщение
 	def post(self, request, *args, **kwargs):
-		# print("sender: ", request.POST.get("you"))
+		# print("sender: ", request.POST.get("user"))
 		# print("recipient: ", request.POST.get('recipient'))
-		sender = User.objects.get(pk=request.POST.get('you'))  # узнать отправителя сообщения (человека, который его отправил)
+		sender = User.objects.get(pk=request.POST.get('user'))  # узнать отправителя сообщения (человека, который его отправил)
 		recipient = User.objects.get(pk=request.POST.get('recipient'))  # получить получателя сообщения (Вас)
 		message = request.POST.get('message')  # получить сообщение из формы
 

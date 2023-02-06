@@ -1,5 +1,6 @@
 from django.urls import path
 from .views import InboxView, UserListsView, MessagesListView
+from chat_app import views
 
 app_name = 'chat_app'
 

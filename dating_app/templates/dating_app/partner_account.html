@@ -3,62 +3,81 @@
 {% load static %}
 
 {% block content %}
-<section class="h-100 gradient-custom-2 w-100">
-    <div class="container py-10 h-100">
-      <div class="row d-flex justify-content-center align-items-center h-100">
-        <div class="col col-lg-9 col-xxl-7">
-          <div class="card">
-            <div class="upper">
-
-              <img src="{{ partner_account.profile.banner.url }}" style="object-fit: cover; object-position: center; height: 200px;" class="img-fluid">
-              
-            </div>
-  
-            <div class="user text-center">
-  
-              <div class="profile">
-  
-                <img src="{{ partner_account.profile.profile_pic.url }}" style="object-fit: cover; object-position: center; height: 200px;" class="rounded-circle" width="80">
-                
+  <link rel="stylesheet" href="{% static "styles/partner_account.css" %}">
+  <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <div class="card"><img class="card-img-top" src="{{ partner_account.profile.banner.url }}" style="object-fit: cover; object-position: center;" alt="Card image cap">
+            <div class="card-body little-profile">
+              <div style="margin-left: 250px;">
+              <h4>{{ partner_account.profile.first_name }} {{ partner_account.profile.last_name }}, {{ partner_account.profile.age }}</h4>
+              <h6><p><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" style="margin-bottom: 5px;" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+                <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
+              </svg> {{ partner_account.profile.city }}</p></h6>
+              <a href="{% url 'chat_app:inbox' partner_account %}" style="margin-right: 10px;" class="btn btn-outline-primary"><svg style="margin-bottom: 5px;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-fill" viewBox="0 0 16 16">
+                <path d="M8 15c4.418 0 8-3.134 8-7s-3.582-7-8-7-8 3.134-8 7c0 1.76.743 3.37 1.97 4.6-.097 1.016-.417 2.13-.771 2.966-.079.186.074.394.273.362 2.256-.37 3.597-.938 4.18-1.234A9.06 9.06 0 0 0 8 15z"/>
+              </svg> Chat Now</a>
+              <a href="{% url 'chat_app:inbox' partner_account %}" class="btn btn-outline-danger"><svg style="margin-bottom: 5px;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+              </svg> Like</a>
               </div>
-            </div>
-            <div class="p-4 text-black" style="background-color: #ffffff;">
-              <div class="d-flex justify-content-end text-center py-1">
-                <div>
-                  <p class="mb-1 h5">1</p>
-                  <p class="small text-muted mb-0">Photos</p>
-                </div>
-                <div class="px-3">
-                  <p class="mb-1 h5">0</p>
-                  <p class="small text-muted mb-0">Likes</p>
-                </div>
-              </div>{% if partner_account.profile.first_name is None %}
-                      <h5 class="mt-5">{{ partner_account.username }}, {{ partner_account.profile.age }}</h5>
-                    {% else %}  
-                      <h5 class="mt-5">{{ partner_account.profile.first_name }}, {{ partner_account.profile.age }}</h5>
-                    {% endif %}
-                <p style="font-weight: 100;">{{ partner_account.profile.city }}</p>
-                <a href="{% url 'chat_app:inbox' partner_account %}" class="btn btn-outline-primary">Send message</a>
+                <div class="pro-img"><img src="{{ partner_account.profile.profile_pic.url }}" style="object-fit: cover; object-position: center;"  alt="user"></div>
             </div>
           </div>
+       </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col-sm-5">
+        <div class="card p-3" style="background-color: rgb(217, 217, 217);">
+          <h4>Photos (Coming soon)</h4>
+          <div class="row">
+            <div class="col-lg-6">
+              <img
+              src="https://mdbcdn.b-cdn.net/img/Photos/Thumbnails/Square/1.webp"
+              data-mdb-img="https://mdbcdn.b-cdn.net/img/Photos/Square/1.webp"
+              alt="Coconut with Strawberries"
+              class="w-100 shadow-1-strong rounded"
+              />
+            </div>
+            <div class="col-lg-6">
+              <img
+              src="https://mdbcdn.b-cdn.net/img/Photos/Thumbnails/Vertical/1.webp"
+              data-mdb-img="https://mdbcdn.b-cdn.net/img/Photos/Vertical/1.webp"
+              alt="Dark Roast Iced Coffee"
+              class="w-100 shadow-1-strong rounded"
+              />
+              </div>
+          </div>
+        </div>
+        <div class="card p-3 mt-3" style="background-color: rgb(217, 217, 217);">
+          <h4>Interests</h4>
+          <p>Coming soon</p>
+        </div>
+        <div class="card p-3 mt-3" style="background-color: rgb(217, 217, 217);">
+          <h4>Match Predictor</h4>
+          <p>Coming soon</p>
+        </div>
+      </div>
+      <div class="col-sm-7">
+        <div class="card p-3">
+          <h4>About</h4>
+          <p>{{ partner_account.profile.about }}</p>
+        </div>
+        <div class="card p-3 mt-3" style="background-color: rgb(217, 217, 217);">
+          <h4>Physical Details</h4>
+          <p>Coming soon</p>
+        </div>
+        <div class="card p-3 mt-3" style="background-color: rgb(217, 217, 217);">
+          <h4>I'm looking for</h4>
+          <p>Coming soon</p>
+        </div>
+        <div class="card p-3 mt-3" style="background-color: rgb(217, 217, 217);">
+          <h4>Current Goal</h4>
+          <p>Coming soon</p>
         </div>
       </div>
     </div>
-    
+    <h4 class="text-center mt-5" style="color: gray;">Similar Users (coming soon)</h4>
+  </div>
 
-    <div class="container py-10 h-100 mt-3">
-        <div class="row d-flex justify-content-center align-items-center h-100">
-          <div class="col col-lg-9 col-xxl-7">
-            <div class="card">
-              <div class="p-4 text-black" style="background-color: #ffffff;">
-                  <h5>About</h5>
-                  <p style="font-weight: 100;">{{ partner_account.profile.about }}</p>
-              </div>
-            </div>
-            
-          </div>
-        </div>
-      </div>
-    
-  </section>
 {% endblock %}

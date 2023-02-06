@@ -18,21 +18,22 @@ def auth_user(request):
 
 def signup(request):
 	"""Регистрация пользователя"""
+	error_contex = []
 	if request.method == 'GET':
 		return render(request, 'user_app/auth_user.html', {'form': UserCreationForm})
 	else:
 		if not(request.POST['username']):
-			return render(request, 'user_app/auth_user.html', {'form':UserCreationForm(), 'error':'Login can\'t be empty'})
+			error_contex.append('Login can\'t be empty')
 		elif not(request.POST['password1']):
-			return render(request, 'user_app/auth_user.html', {'form':UserCreationForm(), 'error':'Password can\'t be empty'})
+			error_contex.append('Password can\'t be empty')
 		elif not(request.POST['password2']):
-			return render(request, 'user_app/auth_user.html', {'form':UserCreationForm(), 'error':'Confirm Password can\'t be empty'})
+			error_contex.append('Confirm Password can\'t be empty')
 		elif request.POST['password1'] != request.POST['password2']:
-			return render(request, 'user_app/auth_user.html', {'form':UserCreationForm(), 'error':'Password did not match'})
+			error_contex.append('Password did not match')
 		elif len(request.POST['password1']) < 8:
-			return render(request, 'user_app/auth_user.html', {'form':UserCreationForm(), 'error':'Password less then 8 characters'})
+			error_contex.append('Password less then 8 characters')
 		elif len(request.POST['username']) < 5:
-			return render(request, 'user_app/auth_user.html', {'form':UserCreationForm(), 'error':'Login less then 5 characters'})
+			error_contex.append('Login less then 5 characters')
 		else:
 			try:
 				user = User.objects.create_user(username = request.POST['username'], password=request.POST['password1'])
@@ -40,7 +41,9 @@ def signup(request):
 				login(request, user)
 				return redirect('user_app:profile_info')
 			except IntegrityError:
-					return render(request, 'user_app/auth_user.html', {'form': UserCreationForm(), 'error': '*That username has already been taken'})	
+				error_contex.append('That username has already been taken')
+				return render(request, 'user_app/auth_user.html', {'form': UserCreationForm(), 'error_contex': error_contex})	
+		return render(request, 'user_app/auth_user.html', {'form': UserCreationForm(), 'error_contex': error_contex})
 
 @login_required		
 def profile_info(request):

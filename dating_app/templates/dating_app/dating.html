@@ -8,65 +8,62 @@
     <p class="alert alert-warning">Fill out your <a href="{% url 'user_app:user_account' %}">account</a> to increase your chances of finding a partner</p>
     </div>
 {% endif %}
-<h6 class="text-center">All users</h6>
-<hr>
-
-<div class="row g-2">
-{% if profiles %}
-{% for profile in profiles %}
-<a href="{% url 'dating_app:partner_account' profile.id %}" id="a-card">
-	<div class="card m-2" style="width: 13.2rem;">
-	  <div class="img-wrap">
-	  <img src="{{ profile.profile.profile_pic.url }}" class="card-img-top" style="object-fit: cover; object-position: center;" alt="...">
-		{% if profile.profile.online_status %}  
-		  <div class="status-circle-online"></div>
-		{% else %}
-		  <div class="status-circle-offline"></div>
+<div class="album py-5">
+    <div class="container">
+      <div class="row row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-5 g-3">
+		{% if profiles %}
+		{% for profile in profiles %}
+        <div class="col">
+          <div class="card" style="border: none; box-shadow: 0px 0px 8px 0px rgba(214, 214, 214, 0.469);">
+			<a href="{% url 'dating_app:partner_account' profile.id %}" id="a-card">
+			<img src="{{ profile.profile.profile_pic.url }}" class="bd-placeholder-img card-img-top" style="object-fit: cover; object-position: center;" alt="...">
+			</a>
+            <!-- <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg> -->
+            <div class="card-body">
+			  <h5>{{ profile.profile.first_name }} {{ profile.profile.last_name }}, {{ profile.profile.age }}</h5>
+			  <p><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+				<path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
+			  </svg> {{ profile.profile.city }}</p>
+              <p class="card-text"><i>{{ profile.profile.about|truncatechars:80 }}</i></p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-outline-danger"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
+					<path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+				  </svg> Like</button>
+                </div>
+                <!-- <small class="text-muted">9 mins</small> -->
+              </div>
+            </div>
+          </div>
+      </div>
+	  {% endfor %}
 		{% endif %}
-	  </div>
-	  <div class="card-body">
-		<p class="card-text">
-			{% if profile.profile.sex == male  %}
-				<img src="{% static 'user_app/male.png' %}" style="height: 1rem;" alt="">
-			{% elif profile.profile.sex == Female %}
-				<img src="{% static 'user_app/female.png' %}" style="height: 1rem;" alt="">
-			{% endif %}			
-				<b>{{ profile.profile.first_name }}
-					{% if profile.profile.age is None %}
-					{% else %}
-					{{ profile.profile.age }}
-					{% endif %}
-				  </b>
-		  </p>
-		<p>{{ profile.profile.about|truncatechars:80 }}</p>
-	  </div>
-	</div>
-	</a>
-{% endfor %}
-{% endif %}
+    </div>
+  </div>
 </div>
 <ul class="pagination justify-content-center flex-wrap mt-2 mb-4">
     {% if profiles.has_previous %}
-        <li class="page-item"><a class="page-link" href="?page={{ profiles.previous_page_number }}">&laquo;</a></li>
+        <li class="page-item"><a class="page-link" href="?page={{ profiles.previous_page_number }}" style="color: #8538f7;">&laquo;</a></li>
     {% else %}
-        <li class="disabled page-item"><span class="page-link">&laquo;</span></li>
+        <li class="disabled page-item"><span class="page-link" style="color: #8538f7; border: none;">&laquo;</span></li>
     {% endif %}
     {% for i in page_range|default_if_none:profiles.paginator.get_elided_page_range %}
         {% if profiles.number == i %}
-            <li class="active page-item"><span class="page-link">{{ i }} <span class="sr-only">(current)</span></span>
+            <li class="active page-item"><span class="page-link" style="background-color: #8538f7; border: none;">{{ i }}</span>
             </li>
         {% else %}
             {% if i == profiles.paginator.ELLIPSIS %}
-                <li class="page-item"><span class="page-link">{{ i }}</span></li>
+                <li class="page-item"><span class="page-link" style="color: #8538f7;">{{ i }}</span></li>
             {% else %}
-                <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                <li class="page-item"><a class="page-link" style="color: #8538f7;" href="?page={{ i }}">{{ i }}</a></li>
             {% endif %}
         {% endif %}
     {% endfor %}
     {% if profiles.has_next %}
-        <li class="page-item"><a class="page-link" href="?page={{ profiles.next_page_number }}">&raquo;</a></li>
+        <li class="page-item"><a class="page-link" style="color: #8538f7;" href="?page={{ profiles.next_page_number }}">&raquo;</a></li>
     {% else %}
-        <li class="disabled page-item"><span class="page-link">&raquo;</span></li>
+        <li class="disabled page-item"><span class="page-link" style="color: #8538f7; border: none;">&raquo;</span></li>
     {% endif %}
 </ul>
+
 {% endblock %}

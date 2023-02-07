@@ -133,7 +133,7 @@ MEDIA_ROOT = BASE_DIR / 'media/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-LOGIN_URL = '/auth'
+LOGIN_URL = '/signin'
 
 try:
     from .local_settings import *

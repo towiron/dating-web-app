@@ -9,18 +9,11 @@ from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
 from .models import Profile
 
-def auth_user(request):
-	if request.user.is_authenticated:
-		return redirect('dating_app:profile_info')
-	else:
-		return render(request, 'user_app/auth_user.html')
-
-
 def signup(request):
 	"""Регистрация пользователя"""
 	error_contex = []
 	if request.method == 'GET':
-		return render(request, 'user_app/auth_user.html', {'form': UserCreationForm})
+		return render(request, 'user_app/sign_up.html', {'form': UserCreationForm})
 	else:
 		if not(request.POST['username']):
 			error_contex.append('Login can\'t be empty')
@@ -42,8 +35,8 @@ def signup(request):
 				return redirect('user_app:profile_info')
 			except IntegrityError:
 				error_contex.append('That username has already been taken')
-				return render(request, 'user_app/auth_user.html', {'form': UserCreationForm(), 'error_contex': error_contex})	
-		return render(request, 'user_app/auth_user.html', {'form': UserCreationForm(), 'error_contex': error_contex})
+				return render(request, 'user_app/sign_up.html', {'form': UserCreationForm(), 'error_contex': error_contex})	
+		return render(request, 'user_app/sign_up.html', {'form': UserCreationForm(), 'error_contex': error_contex})
 
 @login_required		
 def profile_info(request):
@@ -77,13 +70,13 @@ def signin(request):
 		return redirect('dating_app:profile_info')
 	else:
 		if request.method == 'GET':
-			return render(request, 'user_app/auth_user.html',
+			return render(request, 'user_app/sign_in.html',
 										{'form': AuthenticationForm()})
 		else:
 			user = authenticate(request,username=request.POST['username'],
 										password=request.POST['password'])
 			if user is None:
-				return render(request, 'user_app/auth_user.html',
+				return render(request, 'user_app/sign_in.html',
 							{'form': AuthenticationForm(),
 							'error_signin':'Username or password did not match'})
 			else:

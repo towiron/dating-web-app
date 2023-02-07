@@ -21,7 +21,7 @@ def dating(request):
 		contex.update({'date_now': date_now})
 		return render(request, 'dating_app/dating.html', contex)
 	else:
-		return redirect('user_app:profile_info', {})
+		return redirect('user_app:profile_info')
 
 
 

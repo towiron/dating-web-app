@@ -1,0 +1,62 @@
+{% extends "dating_app/base.html" %}
+
+{% load static %}
+
+{% block content %}
+<section class="vh-100" style="background-color: #e7f8ff;">
+	<div class="container py-5 h-100">	
+	  <div class="row d-flex justify-content-center align-items-center h-100">
+		<div class="col col-xl-10">
+		  <div class="card" style="border-radius: 1rem;">
+			<div class="row g-0">
+			  <div class="col-md-6 col-lg-5 d-none d-md-block">
+				<img src="{% static 'user_app/cover.jpg' %}"
+				  alt="login form" class="img-fluid" style="border-radius: 1rem 0 0 1rem; height: 100%;" />
+			  </div>
+			  <div class="col-md-6 col-lg-7 d-flex align-items-center">
+				<div class="card-body p-4 p-lg-5 text-black">
+					<form action="{% url 'user_app:signup' %}" method="POST">
+						{% csrf_token %}
+					<div class="d-flex align-items-center mb-3 pb-1">
+					  <i class="fas fa-cubes fa-2x me-3" style="color: #ff6219;"></i>
+					  <span class="h1 fw-bold mb-0"><img src="{% static 'user_app/calambug_logo.png' %}" style="height: 60px;" alt="Calambug"></span>
+					</div>
+  
+					<h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">It's Never too late<br>to Find Match</h3>
+					{% if error_contex %}
+			{% for error in error_contex %}
+                <div class="alert alert-danger" role="alert">
+                    <span><svg xmlns="http://www.w3.org/2000/svg" style="align-items: center; margin-top: -5px;" width="16" height="16" fill="currentColor" class="bi bi-exclamation-octagon-fill" viewBox="0 0 16 16">
+						<path d="M11.46.146A.5.5 0 0 0 11.107 0H4.893a.5.5 0 0 0-.353.146L.146 4.54A.5.5 0 0 0 0 4.893v6.214a.5.5 0 0 0 .146.353l4.394 4.394a.5.5 0 0 0 .353.146h6.214a.5.5 0 0 0 .353-.146l4.394-4.394a.5.5 0 0 0 .146-.353V4.893a.5.5 0 0 0-.146-.353L11.46.146zM8 4c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995A.905.905 0 0 1 8 4zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+					  </svg></span> {{ error }}
+                </div>
+			{% endfor %}
+            {% endif %}
+  
+					<div class="form-outline mb-4">
+					  <input type="text" id="username" name="username" class="form-control form-control-lg" placeholder="Login" />
+					</div>
+  
+					<div class="form-outline mb-4">
+					  <input type="password" id="password1" name="password1" class="form-control form-control-lg" placeholder="Password"/>
+					</div>
+					<div class="form-outline mb-4">
+						<input type="password" id="password2" name="password2" class="form-control form-control-lg" placeholder="Confirm Password"/>
+					  </div>
+  
+					<div class="pt-1 mb-4">
+					  <button class="btn btn-dark btn-lg btn-block" type="submit">Sign Up</button>
+					</div>
+					<p class="mb-5 pb-lg-2" style="color: #393f81;">Have an account? <a href="{% url 'user_app:signin' %}"
+						style="color: #393f81;">Sign In</a></p>
+				  </form>
+  
+				</div>
+			  </div>
+			</div>
+		  </div>
+		</div>
+	  </div>
+	</div>
+  </section>
+{% endblock %}

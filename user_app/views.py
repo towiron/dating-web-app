@@ -17,6 +17,10 @@ def signup(request):
 	else:
 		if not(request.POST['username']):
 			error_contex.append('Login can\'t be empty')
+		elif not(str(request.POST['username']).isalnum()):
+			error_contex.append('Invalid login')
+		elif not(str(request.POST['password1']).isalnum()):
+			error_contex.append('Invalid password')
 		elif not(request.POST['password1']):
 			error_contex.append('Password can\'t be empty')
 		elif not(request.POST['password2']):

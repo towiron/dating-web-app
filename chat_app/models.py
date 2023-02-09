@@ -9,7 +9,7 @@ class Message(models.Model):
     is_read = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.message
+        return f'Сообщение от: {self.sender} к {self.recipient}'
 
     class Meta:
         db_table = 'chat_messages'

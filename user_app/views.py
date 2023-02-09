@@ -29,8 +29,8 @@ def signup(request):
 			error_contex.append('Password did not match')
 		elif len(request.POST['password1']) < 8:
 			error_contex.append('Password less then 8 characters')
-		elif len(request.POST['username']) < 5:
-			error_contex.append('Login less then 5 characters')
+		elif str(request.POST['username']).lower() in ['admin', 'админ', 'аdmin', 'god', 'administrator', 'аdministrator', 'аdministrаtor']:
+			error_contex.append('This login can\'t be taken')
 		else:
 			try:
 				user = User.objects.create_user(username = request.POST['username'], password=request.POST['password1'])

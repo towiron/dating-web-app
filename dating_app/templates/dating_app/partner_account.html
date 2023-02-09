@@ -9,42 +9,12 @@
         <div class="col-12">
           <div class="card">
             <img class="card-img-top" src="{{ partner_account.profile.banner.url }}" style="object-fit: cover; object-position: center;" alt="Card image cap">
-            <!-- <div class="card-body little-profile">
-              <div class="row">
-              <div class="col-6 col-lg-4" style="max-width: 210px;">
-                <img src="{{ partner_account.profile.profile_pic.url }}" style="object-fit: cover; object-position: center; border-radius: 50%; height: 200px;"  alt="user">
-              </div>
-              <div class="col-sm-6 col-lg-8" style=" max-width: 200px;">
-              <h4>{{ partner_account.profile.first_name }}<br>{{ partner_account.profile.last_name }}, {{ partner_account.profile.age }}</h4>
-              <h6><p><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" style="margin-bottom: 5px;" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
-                <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
-              </svg> {{ partner_account.profile.city }}</p></h6>
-              <a href="{% url 'chat_app:inbox' partner_account %}" style="margin-right: 10px;" class="btn btn-outline-primary"><svg style="margin-bottom: 5px;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-fill" viewBox="0 0 16 16">
-                <path d="M8 15c4.418 0 8-3.134 8-7s-3.582-7-8-7-8 3.134-8 7c0 1.76.743 3.37 1.97 4.6-.097 1.016-.417 2.13-.771 2.966-.079.186.074.394.273.362 2.256-.37 3.597-.938 4.18-1.234A9.06 9.06 0 0 0 8 15z"/>
-              </svg> Chat Now</a>
-              <a href="{% url 'chat_app:inbox' partner_account %}" class="btn btn-outline-danger"><svg style="margin-bottom: 5px;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
-                <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
-              </svg> Like</a>
-            </div>
-            </div>
-            </div> -->
             <div class="card-body little-profile text-center">
-              <div class="pro-img"><img src="{{ partner_account.profile.profile_pic.url }}" alt="user"></div>
+              <div class="pro-img"><img src="{{ partner_account.profile.profile_pic.url }}" style="width: 250px; height: 250px; object-fit: cover; object-position: center;"  alt="user"></div>
               <h3 class="m-b-0">{{ partner_account.profile.first_name }} {{ partner_account.profile.last_name }}, {{ partner_account.profile.age }}</h3>
               <p><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" style="margin-bottom: 5px;" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
                 <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
               </svg> {{ partner_account.profile.city }}</p> <a href="{% url 'chat_app:inbox' partner_account %}" class="m-t-10 waves-effect waves-dark btn btn-primary btn-md btn-rounded" data-abc="true">Chat Now</a>
-              <!-- <div class="row text-center m-t-20">
-                  <div class="col-lg-4 col-md-4 m-t-20">
-                      <h3 class="m-b-0 font-light">10434</h3><small>Posts</small>
-                  </div>
-                  <div class="col-lg-4 col-md-4 m-t-20">
-                      <h3 class="m-b-0 font-light">434K</h3><small>Followers</small>
-                  </div>
-                  <div class="col-lg-4 col-md-4 m-t-20">
-                      <h3 class="m-b-0 font-light">5454</h3><small>Following</small>
-                  </div>
-              </div> -->
           </div>
           </div>
        </div>

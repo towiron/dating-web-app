@@ -5,7 +5,7 @@
 {% if messages %}
 <div class="contact-profile" style="font-weight: 500;">
   <a href="{% url 'dating_app:partner_account' other_person.id %}">
-  <img src="{{ other_person.profile.profile_pic.url }}" alt="" />
+  <img src="{{ other_person.profile.profile_pic.url }}" style="width: 40px; height: 40px; object-fit: cover; object-position: center;" alt="" />
   <p>{{ other_person.profile.first_name }} {{ other_person.profile.last_name }}</p>
   </a>
 </div>
@@ -14,7 +14,7 @@
 
     <ul>
       <li class="sent">
-        <img src="{{ other_person.profile.profile_pic.url }}" alt="" />
+        <img src="{{ other_person.profile.profile_pic.url }}" style="width: 40px; height: 40px; object-fit: cover; object-position: center;" alt="" />
         <p>{{ message.message }}</p>
       </li>
     </ul>
@@ -23,7 +23,7 @@
 
     <ul>
       <li class="replies">
-        <img src="{{ user.profile.profile_pic.url }}" alt="" />
+        <img src="{{ user.profile.profile_pic.url }}" style="width: 40px; height: 40px; object-fit: cover; object-position: center;" alt="" />
         <p>{{ message.message }}</p>
       </li>
     </ul>

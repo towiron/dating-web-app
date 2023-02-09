@@ -7,8 +7,8 @@ from faker import Faker
 fake = Faker()
 
 
-boys_path = "path"
-girls_path = "path"
+boys_path = "/home/botir/images/boys"
+girls_path = "/home/botir/images/girls"
 
 boys_files=os.listdir(boys_path)
 girls_files=os.listdir(girls_path)

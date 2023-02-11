@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from .models import Message
 from django.views.generic import DetailView, ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
-
+from dating_app.models import Like
 
 
 class MessagesListView(LoginRequiredMixin, ListView):
@@ -29,6 +29,7 @@ class MessagesListView(LoginRequiredMixin, ListView):
 		context['messages_list'] = messages
 		context['other_users'] = other_users
 		context['user'] = user
+		context['likes'] = Like.objects.filter(user=self.request.user).order_by('-date')
 		return context
 
 
@@ -74,6 +75,7 @@ class InboxView(LoginRequiredMixin, DetailView):
 		context['other_person'] = other_user  # узнайте имя другого человека, с которым вы общаетесь, из указанного имени пользователя
 		context['user'] = user  # отправьте свой основной ключ на POST
 		context['other_users'] = other_users
+		context['likes'] = Like.objects.filter(user=self.request.user).order_by('-date')
 
 		return context
 

@@ -1,11 +1,11 @@
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404, redirect, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from user_app.models import Profile
 from django.db.models import Q
 from datetime import datetime
 from django.core.paginator import Paginator, EmptyPage, InvalidPage
-from django.views.generic import ListView, DetailView
+from .models import Like
 
 
 
@@ -19,9 +19,23 @@ def dating(request):
 		contex = get_pogination(request, profiles_list, 10)
 		date_now = datetime.now()
 		contex.update({'date_now': date_now})
+		contex.update({'likes': Like.objects.filter(user=request.user).order_by('-date')})
 		return render(request, 'dating_app/dating.html', contex)
 	else:
 		return redirect('user_app:profile_info')
+
+
+def like_add(request, user_id):
+	liked = User.objects.get(id=user_id)
+	likes = Like.objects.filter(user=request.user, liked=liked)
+
+	if not likes.exists():
+		Like.objects.create(user=request.user, liked=liked)
+	else:
+		like = Like.objects.get(liked=liked)
+		like.delete()
+	return HttpResponseRedirect(request.META['HTTP_REFERER'])
+
 
 
 
@@ -31,7 +45,7 @@ def partner_account(request, user_id):
 	if profile.first_name:
 		"""Показ деталей профилья других пользователей"""
 		partner_account = get_object_or_404(User, pk=user_id)
-		return render(request, 'dating_app/partner_account.html', {'partner_account':partner_account})
+		return render(request, 'dating_app/partner_account.html', {'partner_account':partner_account, 'likes': Like.objects.filter(user=request.user).order_by('-date')})
 	else:
 		return redirect('user_app:profile_info')
 
@@ -60,6 +74,7 @@ def search_results(request):
 			).exclude(id=request.user.id)
 
 		contex = get_pogination(request, profiles_list, 10)
+		contex.update({'likes': Like.objects.filter(user=request.user).order_by('-date')})
 		if profiles_list:
 			contex.update({'query': f'We found {len(profiles_list)} people with name "{query}"'})
 		else:

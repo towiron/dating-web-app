@@ -23,7 +23,7 @@
 <a href="{% url 'chat_app:inbox' us %}">
 <li class="contact">
   <div class="wrap">
-    <img src="{{ us.profile.profile_pic.url }}" alt="" />
+    <img src="{{ us.profile.profile_pic.url }}"style="5px width: 40px; height: 40px; object-fit: cover; object-position: center;" alt="" />
     <div class="meta">
       <p class="name">{{ us.profile.first_name }} {{ us.profile.last_name }}</p>
       <p class="preview">{{message.message|truncatechars:30}}</p>

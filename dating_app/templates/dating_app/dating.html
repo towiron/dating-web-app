@@ -3,35 +3,64 @@
 {% load static %}
 
 {% block content %}
-{% if user.profile.sex is None or user.profile.seeking is None%}
-    <div class="container text-center">
-    <p class="alert alert-warning">Fill out your <a href="{% url 'user_app:user_account' %}">account</a> to increase your chances of finding a partner</p>
-    </div>
-{% endif %}
+
+{% block search_bar %}
+{% endblock %}
+<div class="container d-flex flex-wrap justify-content-center">
+	<form  method="GET" action="{% url 'dating_app:search_results' %}" role="search">
+  <div class="text-end">
+  <div class="input-group">
+	<input type="search" style="width: 150px; " class="form-control" name="q" autocomplete="off" placeholder="Search..." aria-label="Search">
+	{% if request.GET.sex == 'M' %}
+	<select class="form-select" name="sex" style="width: 100px;">
+		<option value="ALL">All</option>
+		<option value="M" selected="selected">Boys</option>
+		<option value="F">Girls</option>
+	  </select>
+	{% elif request.GET.sex == 'F' %}
+	<select class="form-select" name="sex" style="width: 80px;">
+		<option value="ALL">All</option>
+		<option value="M">Boys</option>
+		<option value="F" selected="selected">Girls</option>
+	  </select>
+	{% else %}
+	<select class="form-select" name="sex" style="width: 80px;">
+	  <option value="ALL" selected="selected">All</option>
+	  <option value="M">Boys</option>
+	  <option value="F">Girls</option>
+	</select>
+	{% endif %}
+	<button class="btn btn-primary" style="background-color: #8538f7; border: none;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+		<path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+	  </svg></button>
+  </div>
+  </div>
+  </form>
+  </div>
 <div class="album py-5">
     <div class="container">
       <div class="row row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-5 g-3">
-		{% if profiles %}
-		{% for profile in profiles %}
+		{% if cards %}
+		{% for card in cards %}
         <div class="col">
           <div class="card" style="max-width: 250px; min-width:150px; border: none; box-shadow: 0px 0px 8px 0px rgba(214, 214, 214, 0.469);">
-			<a href="{% url 'dating_app:partner_account' profile.id %}" id="a-card">
-			<img src="{{ profile.profile.profile_pic.url }}" class="bd-placeholder-img card-img-top" style="max-width: 250px; max-height: 250px; min-width: 150px; min-height: 150px; object-fit: cover; object-position: center;" alt="...">
+			<a href="{% url 'dating_app:partner_account' card.id %}" id="a-card">
+			<img src="{{ card.profile.profile_pic.url }}" class="bd-placeholder-img card-img-top" style="max-width: 250px; max-height: 250px; min-width: 150px; min-height: 150px; object-fit: cover; object-position: center;" alt="...">
 			</a>
             <!-- <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg> -->
             <div class="card-body">
-			  <h5>{{ profile.profile.first_name }} {{ profile.profile.last_name }}, {{ profile.profile.age }}</h5>
+			  <h5>{{ card.first_name }} {{ card.last_name }}, {{ card.age }}</h5>
 			  <p><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
 				<path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
-			  </svg> {{ profile.profile.city }}</p>
-              <p class="card-text"><i>{{ profile.profile.about|truncatechars:80 }}</i></p>
+			  </svg> {{ card.profile.city }}</p>
+              <p class="card-text"><i>{{ card.profile.about|truncatechars:80 }}</i></p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
                   <button type="button" class="btn btn-outline-danger"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
 					<path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
 				  </svg> Like</button>
                 </div>
-                <!-- <small class="text-muted">9 mins</small> -->
+                <!-- <small class="text-muted"><img src="{% static 'user_app/male.png' %}" alt=""></small> -->
               </div>
             </div>
           </div>
@@ -42,28 +71,27 @@
   </div>
 </div>
 <ul class="pagination justify-content-center flex-wrap mt-2 mb-4">
-    {% if profiles.has_previous %}
+    {% if cards.has_previous %}
         <li class="page-item"><a class="page-link" href="?page={{ profiles.previous_page_number }}" style="color: #8538f7;">&laquo;</a></li>
     {% else %}
         <li class="disabled page-item"><span class="page-link" style="color: #8538f7; border: none;">&laquo;</span></li>
     {% endif %}
-    {% for i in page_range|default_if_none:profiles.paginator.get_elided_page_range %}
-        {% if profiles.number == i %}
+    {% for i in page_range|default_if_none:cards.paginator.get_elided_page_range %}
+        {% if cards.number == i %}
             <li class="active page-item"><span class="page-link" style="background-color: #8538f7; border: none;">{{ i }}</span>
             </li>
         {% else %}
-            {% if i == profiles.paginator.ELLIPSIS %}
+            {% if i == cards.paginator.ELLIPSIS %}
                 <li class="page-item"><span class="page-link" style="color: #8538f7;">{{ i }}</span></li>
             {% else %}
                 <li class="page-item"><a class="page-link" style="color: #8538f7;" href="?page={{ i }}">{{ i }}</a></li>
             {% endif %}
         {% endif %}
     {% endfor %}
-    {% if profiles.has_next %}
-        <li class="page-item"><a class="page-link" style="color: #8538f7;" href="?page={{ profiles.next_page_number }}">&raquo;</a></li>
+    {% if cards.has_next %}
+        <li class="page-item"><a class="page-link" style="color: #8538f7;" href="?page={{ cards.next_page_number }}">&raquo;</a></li>
     {% else %}
         <li class="disabled page-item"><span class="page-link" style="color: #8538f7; border: none;">&raquo;</span></li>
     {% endif %}
 </ul>
-
 {% endblock %}

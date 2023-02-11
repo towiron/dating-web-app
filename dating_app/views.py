@@ -51,9 +51,12 @@ def search_results(request):
 	if profile.first_name:
 		"""Поиск пользователей"""
 		query = request.GET.get("q", default = "")
+		sex = request.GET.get('sex', default = ['M', 'F'])
+		if sex == 'ALL':
+			sex = ['M', 'F']
 		
 		profiles_list = Profile.objects.filter(
-				Q(first_name__icontains=query) | Q(last_name__icontains=query)
+				Q(first_name__icontains=query) | Q(last_name__icontains=query), sex__in=sex
 			).exclude(id=request.user.id)
 
 		contex = get_pogination(request, profiles_list, 10)
@@ -75,13 +78,13 @@ def get_pogination(request, profiles_list, objects_num):
 		page = 1
 	
 	try:
-		profiles = paginator.page(page)
+		cards = paginator.page(page)
 	except(EmptyPage, InvalidPage):
-		profiles = paginator.page(paginator.num_pages)
+		cards = paginator.page(paginator.num_pages)
 	page_range = paginator.get_elided_page_range(number=page)
 
 	contex = {
-		'profiles':profiles,
+		'cards':cards,
 		'page_range': page_range
 	}
 	return contex

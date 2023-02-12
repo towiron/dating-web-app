@@ -17,10 +17,6 @@ def signup(request):
 	else:
 		if not(request.POST['username']):
 			error_contex.append('Login can\'t be empty')
-		elif not(str(request.POST['username']).isalnum()):
-			error_contex.append('Invalid login')
-		elif not(str(request.POST['password1']).isalnum()):
-			error_contex.append('Invalid password')
 		elif not(request.POST['password1']):
 			error_contex.append('Password can\'t be empty')
 		elif not(request.POST['password2']):
@@ -82,11 +78,12 @@ def user_account(request):
 			p_form = ProfileUpdateForm(request.POST,
 										request.FILES,
 										instance=request.user.profile)
-			if u_form.is_valid() and p_form.is_valid():
+			try:
 				u_form.save()
 				p_form.save()
-				messages.success(request, f'Your account has been updated!')
 				return redirect('user_app:user_account') # Перенаправление на страницу профиля пользователя
+			except ValueError:
+				return render(request, 'user_app/user_account.html', {'error':'Files is too large, requirement is less than 2.5 MB'})
 
 		else:
 			u_form = UserUpdateForm(instance=request.user)
@@ -169,8 +166,12 @@ def sign_up_step_three(request):
 			if not(request.POST['about']):
 				return render(request, 'user_app/sign_up_step_three.html', {'error': 'About field can\'t be empty'})
 			else:
-				step_three_form.save()
-				return redirect('dating_app:dating')
+				try:
+					step_three_form.save()
+					return redirect('dating_app:dating')
+				except ValueError:
+					return render(request, 'user_app/sign_up_step_three.html', {'error': 'File is too large, requirement is less than 2.5 MB'})
+
 		else:
 			step_three_form = SignUpStepThreeForm(instance=request.user.profile)
 

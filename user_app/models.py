@@ -2,6 +2,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from PIL import Image
+from .validators import validate_file_size
 
 def user_directory_path(instance, filename):
     # Файлы загрузятся в MEDIA_ROOT/user_images/username/<filename>
@@ -15,8 +16,8 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     first_name = models.CharField(max_length=20, null=True, blank=True)
     last_name = models.CharField(max_length=30, null=True, blank=True)
-    profile_pic = models.ImageField(default='ava.jpg', upload_to=user_directory_path, blank=True)
-    banner = models.ImageField(default='banner.jpg', upload_to=user_directory_path, blank=True)
+    profile_pic = models.ImageField(default='ava.jpg', upload_to=user_directory_path, blank=True, validators=[validate_file_size])
+    banner = models.ImageField(default='banner.jpg', upload_to=user_directory_path, blank=True, validators=[validate_file_size])
     age = models.PositiveIntegerField(null=True, blank=True)
     sex = models.CharField(max_length=1, choices=SexOptions.choices, blank=True, null=True) 
     seeking = models.CharField(max_length=1, choices=SexOptions.choices, blank=True, null=True) 

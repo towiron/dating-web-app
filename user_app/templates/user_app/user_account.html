@@ -11,6 +11,9 @@
     <div class="row g-5">
       <div class="col-md-6 col-lg-6 order-md-last">
         <h4 class="mb-3">Media</h4>
+        {% if error %}
+        <p class="alert alert-danger">{{ error }}</p>
+        {% endif %}
         <div class="card"> <img class="card-img-top" src="{{ user.profile.banner.url }}" style="object-fit: cover; object-position: center;" alt="Card image cap">
           <div class="card-body little-profile text-center">
               <div class="pro-img"><img src="{{ user.profile.profile_pic.url }}" style="object-fit: cover; object-position: center;"  alt="user"></div>
@@ -34,22 +37,22 @@
               <label for="firstName" class="form-label">First name</label>
               <input type="text" name="first_name" id="id_first_name" class="form-control" value="{{ user.profile.first_name }}">
             </div>
-
             <div class="col-sm-6">
               <label for="lastName" class="form-label">Last name</label>
               <input type="text" name="last_name" id="id_last_name" class="form-control" value="{{ user.profile.last_name }}">
-              <div class="invalid-feedback">
-                Valid last name is required.
-              </div>
             </div>
 
-            <div class="col-12">
+            <div class="col-8">
               <label for="username" class="form-label">Username</label>
               <div class="input-group has-validation">
                 <span class="input-group-text">@</span>
                 <input type="text" name="username" id="username" class="form-control" value="{{ user.username }}">
               </div>
             </div>
+            <div class="col-4">
+              <label for="age" class="form-label">Age</label>
+                <input type="number" class="form-control" name="age" value="{{ user.profile.age }}" id="id_age" min="18" max="99" pattern="[0-9]{3}"  autocomplete="off">
+              </div>
             <div class="col">
               <label for="city" class="form-label">Location</label>
               <input type="text" name="city" id="id_city" class="form-control" value="{{ user.profile.city }}" placeholder="Your country and city">

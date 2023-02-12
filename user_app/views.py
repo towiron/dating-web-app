@@ -4,7 +4,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.db import IntegrityError
-from .forms import UserUpdateForm, ProfileUpdateForm
+from .forms import UserUpdateForm, ProfileUpdateForm, SignUpStepOneForm, SignUpStepTwoForm, SignUpStepThreeForm
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
 from .models import Profile
@@ -36,42 +36,18 @@ def signup(request):
 				user = User.objects.create_user(username = request.POST['username'], password=request.POST['password1'])
 				user.save()
 				login(request, user)
-				return redirect('user_app:profile_info')
+				return redirect('user_app:sign_up_step_one')
 			except IntegrityError:
 				error_contex.append('That username has already been taken')
 				return render(request, 'user_app/sign_up.html', {'form': UserCreationForm(), 'error_contex': error_contex})	
 		return render(request, 'user_app/sign_up.html', {'form': UserCreationForm(), 'error_contex': error_contex})
-
-@login_required		
-def profile_info(request):
-	profile = Profile.objects.get(pk=request.user.pk)
-	if not profile.first_name:	
-		"""Личный аккаунт пользователя, где он может редактировать пользовательские данные"""
-		if request.method == 'POST':
-			p_form = ProfileUpdateForm(request.POST,
-										request.FILES,
-										instance=request.user.profile)
-			if p_form.is_valid():
-				p_form.save()
-				messages.success(request, f'Your account has been updated!')
-				return redirect('dating_app:dating') # Перенаправление на страницу профиля пользователя
-		else:
-			p_form = ProfileUpdateForm(instance=request.user.profile)
-
-		context = {
-			'p_form': p_form,
-		}
-
-		return render(request, 'user_app/profile_info.html', context)
-	else:
-		return redirect('dating_app:dating')
 
 
 
 def signin(request):
 	"""Вход пользователя"""
 	if request.user.is_authenticated: # Если пользователь в системе, то у него нет доступа к форме входа
-		return redirect('dating_app:profile_info')
+		return redirect('dating_app:dating')
 	else:
 		if request.method == 'GET':
 			return render(request, 'user_app/sign_in.html',
@@ -85,7 +61,7 @@ def signin(request):
 							'error_signin':'Username or password did not match'})
 			else:
 				login(request, user)
-				return redirect('user_app:profile_info')
+				return redirect('dating_app:dating')
 
 
 @login_required
@@ -99,7 +75,7 @@ def logout_user(request):
 @login_required
 def user_account(request):
 	profile = Profile.objects.get(pk=request.user.pk)
-	if profile.first_name:
+	if profile.about:
 		"""Личный аккаунт пользователя, где он может редактировать пользовательские данные"""
 		if request.method == 'POST':
 			u_form = UserUpdateForm(request.POST, instance=request.user)
@@ -123,5 +99,83 @@ def user_account(request):
 
 		return render(request, 'user_app/user_account.html', context)
 	
+	return redirect('user_app:sign_up_step_three')
+
+
+@login_required
+def sign_up_step_one(request):
+	if request.method == 'POST':
+		step_one_form = SignUpStepOneForm(request.POST,
+									request.FILES,
+									instance=request.user.profile)
+		if not(request.POST['first_name']):
+			return render(request, 'user_app/sign_up_step_one.html', {'error': 'First name can\'t be empty'})
+		if not(str(request.POST['first_name']).isalpha()):
+			return render(request, 'user_app/sign_up_step_one.html', {'error': 'First name can\'t have numbers'})
+		elif not(request.POST['last_name']):
+			return render(request, 'user_app/sign_up_step_one.html', {'error': 'Last name can\'t be empty'})
+		if not(str(request.POST['last_name']).isalpha()):
+			return render(request, 'user_app/sign_up_step_one.html', {'error': 'Last name can\'t have numbers'})
+		elif not(request.POST['age']):
+			return render(request, 'user_app/sign_up_step_one.html', {'error': 'Age can\'t be empty'})
+		else:
+			step_one_form.save()
+			return redirect('user_app:sign_up_step_two')
 	else:
-		return redirect('user_app:profile_info')
+		step_one_form = SignUpStepOneForm(instance=request.user.profile)
+
+	context = {
+		'step_one_form': step_one_form,
+	}
+	return render(request, 'user_app/sign_up_step_one.html', context)
+
+
+
+@login_required
+def sign_up_step_two(request):
+	profile = Profile.objects.get(pk=request.user.pk)
+	if profile.first_name and profile.last_name and profile.age:
+		if request.method == 'POST':
+			step_two_form = SignUpStepTwoForm(request.POST,
+										request.FILES,
+										instance=request.user.profile)
+			if not(request.POST['city']):
+				return render(request, 'user_app/sign_up_step_two.html', {'error': 'Location can\'t be empty'})
+			elif request.POST['sex'] not in ['M', 'F']:
+					return render(request, 'user_app/sign_up_step_two.html', {'error': 'Choose correct sex field'})
+			elif request.POST['seeking'] not in ['M', 'F']:
+					return render(request, 'user_app/sign_up_step_two.html', {'error': 'Choose correct seeking field'})
+			else:
+				step_two_form.save()
+				return redirect('user_app:sign_up_step_three')
+		else:
+			step_two_form = SignUpStepTwoForm(instance=request.user.profile)
+
+		context = {
+			'step_two_form': step_two_form,
+		}
+		return render(request, 'user_app/sign_up_step_two.html', context)
+	return redirect('user_app:sign_up_step_one')
+
+
+@login_required
+def sign_up_step_three(request):
+	profile = Profile.objects.get(pk=request.user.pk)
+	if profile.city and profile.sex and profile.seeking:
+		if request.method == 'POST':
+			step_three_form = SignUpStepThreeForm(request.POST,
+										request.FILES,
+										instance=request.user.profile)
+			if not(request.POST['about']):
+				return render(request, 'user_app/sign_up_step_three.html', {'error': 'About field can\'t be empty'})
+			else:
+				step_three_form.save()
+				return redirect('dating_app:dating')
+		else:
+			step_three_form = SignUpStepThreeForm(instance=request.user.profile)
+
+		context = {
+			'step_three_form': step_three_form,
+		}
+		return render(request, 'user_app/sign_up_step_three.html', context)
+	return redirect('user_app:sign_up_step_two')

@@ -99,11 +99,25 @@
   opacity: 0.8;
 }
 
+#signUpForm .form-footer .previous{
+	text-decoration: none;
+	background-color: #8538f7;
+	border: 1px solid #8538f7 !important;
+	color: #ffffff;
+	border: none;
+	padding: 13px 30px;
+	font-size: 1em;
+	cursor: pointer;
+	border-radius: 5px;
+	flex: 1;
+	margin-top: 5px;
+}
+#signUpForm .form-footer .previous:hover {
+  opacity: 0.8;
+}
+
 #signUpForm .form-footer #prevBtn {
 	background-color: #fff;
 	color: #8538f7;
 }
-
-
-
 

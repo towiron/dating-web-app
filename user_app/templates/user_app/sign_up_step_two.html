@@ -1,0 +1,61 @@
+{% extends "dating_app/base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'styles/profile_info.css' %}">
+
+<div class="container text-center">
+	{% if error %}
+	<p class="alert alert-warning">{{ error }}</p>
+	{% endif %}
+    <form id="signUpForm" method="POST" action="{% url 'user_app:sign_up_step_two' %}">
+		<div class="progress"  role="progressbar" aria-label="Example 1px high" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="height: 1px">
+			<div class="progress-bar" style="width: 66%; background-color: #8538f7;"></div>
+		  </div>
+		{% csrf_token %}
+            <p class="text-center mb-4">STEP 2/3</p>
+            <div class="mb-3">
+				{% if user.profile.city %}
+				<input type="text" name="city" id="id_city" value="{{ user.profile.city }}" autocomplete="off">
+				{% else %}
+                <input type="text" name="city" id="id_city" placeholder="Your country and city" autocomplete="off">
+				{% endif %}
+            </div>
+            <div class="input-group mb-3">
+				<div class="input-group-prepend">
+				  <label class="input-group-text" for="id_sex">I'm a</label>
+				</div>
+				<select class="custom-select" name="sex" id="id_sex">
+					{% if user.profile.sex == "M" %}
+					<option value="M" selected="selected">Male</option>
+					<option value="F">Female</option>
+					{% else %}
+					<option value="M">Male</option>
+					<option value="F" selected="selected">Female</option>
+					{% endif %}
+				</select>
+			  </div>
+			  <div class="input-group mb-3">
+				<div class="input-group-prepend">
+				  <label class="input-group-text" for="id_seeking">Seeking a</label>
+				</div>
+				<select class="custom-select" name="seeking" id="id_seeking">
+					{% if user.profile.seeking == "M" %}
+					<option value="M" selected="selected">Male</option>
+					<option value="F">Female</option>
+					{% else %}
+					<option value="M">Male</option>
+					<option value="F" selected="selected">Female</option>
+					{% endif %}
+				</select>
+			  </div>
+        <div class="form-footer d-flex">
+			<a href="{% url 'user_app:sign_up_step_one' %}" class="previous">Previous</a>
+            <button type="submit">Next</button>
+        </div>
+    </form>
+</div>
+<!-- {{ step_two_form|crispy }} -->
+{% endblock %}

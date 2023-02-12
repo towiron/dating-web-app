@@ -1,0 +1,32 @@
+{% extends "dating_app/base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'styles/profile_info.css' %}">
+
+<div class="container text-center">
+	{% if error %}
+	<p class="alert alert-warning">{{ error }}</p>
+	{% endif %}
+    <form id="signUpForm" method="POST" enctype="multipart/form-data">
+		{% csrf_token %}
+		<div class="progress"  role="progressbar" aria-label="Example 1px high" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="height: 1px">
+			<div class="progress-bar" style="width: 100%; background-color: #8538f7;"></div>
+		  </div>
+            <p class="text-center mb-4">STEP 3/3</p>
+            <div class="text-center">
+				<img src="{{ user.profile.profile_pic.url }}" style="object-fit: cover; object-position: center; height: 200px; width: 200px; margin-bottom: 20px;" class="rounded-circle">
+				</div>
+				<div class="profile-pic text-center">
+				  <input type="file" name="profile_pic" id="id_profile_pic">
+				  </div>
+				  <textarea class="form-control" name="about" cols="40" rows="10" style="width: 100%; margin-top: 20px; margin-bottom: 20px;" id="id_about" placeholder="About you"></textarea>
+		<!-- {{ step_three_form|crispy }} -->
+        <div class="form-footer d-flex">
+			<a href="{% url 'user_app:sign_up_step_two' %}" class="previous">Previous</a>
+            <button type="submit">Done</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

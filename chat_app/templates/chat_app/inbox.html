@@ -1,7 +1,6 @@
 {% extends 'chat_app/messages_list.html' %}
 {% load static %}
 {% block message %}
-
 {% if messages %}
 <div class="contact-profile" style="font-weight: 500;">
   <a href="{% url 'dating_app:partner_account' other_person.id %}">
@@ -43,5 +42,4 @@
   </div>
 </div>
 </form>
-
 {% endblock %}

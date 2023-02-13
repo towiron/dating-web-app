@@ -658,6 +658,11 @@ ul{
 	  right: 65px;
 	}
   }
+  @media screen and (max-width: 735px) {
+	h6.empty {
+	  display: none;
+	}
+  }
   #frame .content .message-input .wrap .attachment:hover {
 	opacity: 1;
   }

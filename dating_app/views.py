@@ -5,8 +5,8 @@ from user_app.models import Profile
 from django.db.models import Q
 from datetime import datetime
 from django.core.paginator import Paginator, EmptyPage, InvalidPage
-from .models import Like
-
+from .models import Favorite
+import random
 
 
 @login_required
@@ -14,25 +14,27 @@ def dating(request):
 	profile = Profile.objects.get(pk=request.user.pk)
 	if profile.about:
 		"""Домашняя страница"""
+		
 		profiles_list = User.objects.order_by('-last_login')
 		profiles_list = User.objects.exclude(id=request.user.id)
-		contex = get_pogination(request, profiles_list, 10)
+		context = get_pogination(request, profiles_list, 10)
 		date_now = datetime.now()
-		contex.update({'date_now': date_now})
-		contex.update({'likes': Like.objects.filter(user=request.user).order_by('-date')})
-		return render(request, 'dating_app/dating.html', contex)
+		context.update({'date_now': date_now})
+		context.update({'favorites': Favorite.objects.filter(user=request.user).order_by('-saved_date')})
+		context.update({'saved_to_favorite': Favorite.objects.values_list('saved', flat=True)})
+		return render(request, 'dating_app/dating.html', context)
 	return redirect('user_app:sign_up_step_three')
 
 
-def like_add(request, user_id):
-	liked = User.objects.get(id=user_id)
-	likes = Like.objects.filter(user=request.user, liked=liked)
+def favorite_add(request, user_id):
+	saved = User.objects.get(id=user_id)
+	favorites = Favorite.objects.filter(user=request.user, saved=saved)
 
-	if not likes.exists():
-		Like.objects.create(user=request.user, liked=liked)
+	if not favorites.exists():
+		Favorite.objects.create(user=request.user, saved=saved)
 	else:
-		like = likes.first()
-		like.delete()
+		favorite = favorites.first()
+		favorite.delete()
 	return HttpResponseRedirect(request.META['HTTP_REFERER'])
 
 
@@ -44,7 +46,7 @@ def partner_account(request, user_id):
 	if profile.about:
 		"""Показ деталей профилья других пользователей"""
 		partner_account = get_object_or_404(User, pk=user_id)
-		return render(request, 'dating_app/partner_account.html', {'partner_account':partner_account, 'likes': Like.objects.filter(user=request.user).order_by('-date')})
+		return render(request, 'dating_app/partner_account.html', {'partner_account':partner_account, 'favorites': Favorite.objects.filter(user=request.user).order_by('-saved_date')})
 	return redirect('user_app:sign_up_step_three')
 
 @login_required
@@ -69,13 +71,15 @@ def search_results(request):
 				Q(first_name__icontains=query) | Q(last_name__icontains=query), sex__in=sex
 			).exclude(id=request.user.id)
 
-		contex = get_pogination(request, profiles_list, 10)
-		contex.update({'likes': Like.objects.filter(user=request.user).order_by('-date')})
+		context = get_pogination(request, profiles_list, 10)
+		# context.update({'saved_users': SaveUser.objects.filter(user=request.user).order_by('-date')})
 		if profiles_list:
-			contex.update({'query': f'We found {len(profiles_list)} people with name "{query}"'})
+			context.update({'query': f'We found {len(profiles_list)} people with name "{query}"'})
+			context.update({'saved_to_favorite': Favorite.objects.values_list('saved', flat=True)})
+			context.update({'favorites': Favorite.objects.filter(user=request.user).order_by('-saved_date')})
 		else:
-			contex.update({'query': f'There are no people with name "{query}"'})
-		return render(request, 'dating_app/search.html', contex)
+			context.update({'query': f'There are no people with name "{query}"'})
+		return render(request, 'dating_app/search.html', context)
 	return redirect('user_app:sign_up_step_three')
 
 
@@ -94,8 +98,16 @@ def get_pogination(request, profiles_list, objects_num):
 		cards = paginator.page(paginator.num_pages)
 	page_range = paginator.get_elided_page_range(number=page)
 
-	contex = {
+	context = {
 		'cards':cards,
 		'page_range': page_range
 	}
-	return contex
+	return context
+
+
+def random_card(request):
+	profile = Profile.objects.get(pk=request.user.pk)
+	card_list = list(Profile.objects.filter(sex__in=str(profile.seeking)
+			).exclude(id=request.user.id))
+	random_card = random.sample(card_list, 1)
+	return render(request, 'dating_app/random_card.html', {'random_card':random_card, 'favorites': Favorite.objects.filter(user=request.user).order_by('-saved_date')})

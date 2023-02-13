@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Like
+from .models import Favorite
 # Register your models here.
 
-admin.site.register(Like)
+admin.site.register(Favorite)

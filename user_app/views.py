@@ -8,35 +8,39 @@ from .forms import UserUpdateForm, ProfileUpdateForm, SignUpStepOneForm, SignUpS
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
 from .models import Profile
+from dating_app.models import Favorite
 
 def signup(request):
 	"""Регистрация пользователя"""
-	error_contex = []
-	if request.method == 'GET':
-		return render(request, 'user_app/sign_up.html', {'form': UserCreationForm})
+	if request.user.is_authenticated: # Если пользователь в системе, то у него нет доступа к форме входа
+		return redirect('dating_app:dating')
 	else:
-		if not(request.POST['username']):
-			error_contex.append('Login can\'t be empty')
-		elif not(request.POST['password1']):
-			error_contex.append('Password can\'t be empty')
-		elif not(request.POST['password2']):
-			error_contex.append('Confirm Password can\'t be empty')
-		elif request.POST['password1'] != request.POST['password2']:
-			error_contex.append('Password did not match')
-		elif len(request.POST['password1']) < 8:
-			error_contex.append('Password less then 8 characters')
-		elif str(request.POST['username']).lower() in ['admin', 'админ', 'аdmin', 'god', 'administrator', 'аdministrator', 'аdministrаtor']:
-			error_contex.append('This login can\'t be taken')
+		error_contex = []
+		if request.method == 'GET':
+			return render(request, 'user_app/sign_up.html', {'form': UserCreationForm})
 		else:
-			try:
-				user = User.objects.create_user(username = request.POST['username'], password=request.POST['password1'])
-				user.save()
-				login(request, user)
-				return redirect('user_app:sign_up_step_one')
-			except IntegrityError:
-				error_contex.append('That username has already been taken')
-				return render(request, 'user_app/sign_up.html', {'form': UserCreationForm(), 'error_contex': error_contex})	
-		return render(request, 'user_app/sign_up.html', {'form': UserCreationForm(), 'error_contex': error_contex})
+			if not(request.POST['username']):
+				error_contex.append('Login can\'t be empty')
+			elif not(request.POST['password1']):
+				error_contex.append('Password can\'t be empty')
+			elif not(request.POST['password2']):
+				error_contex.append('Confirm Password can\'t be empty')
+			elif request.POST['password1'] != request.POST['password2']:
+				error_contex.append('Password did not match')
+			elif len(request.POST['password1']) < 8:
+				error_contex.append('Password less then 8 characters')
+			elif str(request.POST['username']).lower() in ['admin', 'админ', 'аdmin', 'god', 'administrator', 'аdministrator', 'аdministrаtor']:
+				error_contex.append('This login can\'t be taken')
+			else:
+				try:
+					user = User.objects.create_user(username = request.POST['username'], password=request.POST['password1'])
+					user.save()
+					login(request, user)
+					return redirect('user_app:sign_up_step_one')
+				except IntegrityError:
+					error_contex.append('That username has already been taken')
+					return render(request, 'user_app/sign_up.html', {'form': UserCreationForm(), 'error_contex': error_contex})	
+			return render(request, 'user_app/sign_up.html', {'form': UserCreationForm(), 'error_contex': error_contex})
 
 
 
@@ -78,12 +82,17 @@ def user_account(request):
 			p_form = ProfileUpdateForm(request.POST,
 										request.FILES,
 										instance=request.user.profile)
-			try:
-				u_form.save()
-				p_form.save()
-				return redirect('user_app:user_account') # Перенаправление на страницу профиля пользователя
-			except ValueError:
-				return render(request, 'user_app/user_account.html', {'error':'Files is too large, requirement is less than 2.5 MB'})
+			if int(request.POST['age']) < 18:
+				return render(request, 'user_app/user_account.html', {'error':'Your age must be at least 18 years old'})
+			elif not str(request.POST['age']).isnumeric():
+				return render(request, 'user_app/user_account.html', {'error':'Uncorrect age field'})
+			else:
+				try:
+					u_form.save()
+					p_form.save()
+					return redirect('user_app:user_account') # Перенаправление на страницу профиля пользователя
+				except ValueError:
+					return render(request, 'user_app/user_account.html', {'error':'Files is too large, requirement is less than 2.5 MB'})
 
 		else:
 			u_form = UserUpdateForm(instance=request.user)
@@ -92,6 +101,7 @@ def user_account(request):
 		context = {
 			'u_form': u_form,
 			'p_form': p_form,
+			'favorites': Favorite.objects.filter(user=request.user).order_by('-saved_date')
 		}
 
 		return render(request, 'user_app/user_account.html', context)
@@ -115,6 +125,10 @@ def sign_up_step_one(request):
 			return render(request, 'user_app/sign_up_step_one.html', {'error': 'Last name can\'t have numbers'})
 		elif not(request.POST['age']):
 			return render(request, 'user_app/sign_up_step_one.html', {'error': 'Age can\'t be empty'})
+		elif int(request.POST['age']) < 18:
+			return render(request, 'user_app/sign_up_step_one.html', {'error': 'Your age must be at least 18 years old'})
+		elif not str(request.POST['age']).isnumeric():
+				return render(request, 'user_app/sign_up_step_one.html', {'error':'Uncorrect age field'})
 		else:
 			step_one_form.save()
 			return redirect('user_app:sign_up_step_two')

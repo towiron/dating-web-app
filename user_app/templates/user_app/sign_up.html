@@ -1,7 +1,6 @@
 {% extends "dating_app/base.html" %}
 {% load i18n %}
 {% load static %}
-
 {% block content %}
 <section class="vh-100" style="background-color: #e7f8ff;">
 	<div class="container py-5 h-100">	
@@ -15,13 +14,27 @@
 			  </div>
 			  <div class="col-md-6 col-lg-7 d-flex align-items-center">
 				<div class="card-body p-4 p-lg-5 text-black">
+					<div class="d-flex flex-row-reverse">
+						<form action="{% url 'set_language' %}" method="post">{% csrf_token %}
+							<div style="width: fit-content;">
+							  <select onchange="this.form.submit()" name="language" class="form-select" id="inputGroupSelect04" aria-label="Default select example">
+								{% get_current_language as LANGUAGE_CODE %}
+								{% get_available_languages as LANGUAGES %}
+								{% get_language_info_list for LANGUAGES as languages %}
+								{% for language in languages %}
+								<option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected{% endif %}>
+								  {{ language.code }}
+							  </option>
+							{% endfor %}
+							  </select>
+							</div>
+							</form>
+						</div>
 					<form action="{% url 'user_app:signup' %}" method="POST">
 						{% csrf_token %}
 					<div class="d-flex align-items-center mb-3 pb-1">
-					  <i class="fas fa-cubes fa-2x me-3" style="color: #ff6219;"></i>
 					  <span class="h1 fw-bold mb-0"><img src="{% static 'user_app/calambug_logo.png' %}" style="height: 60px;" alt="Calambug"></span>
 					</div>
-  
 					<h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">{% trans "It's Never too late<br>to Find Match" %}</h3>
 					{% if error_contex %}
 			{% for error in error_contex %}
@@ -32,7 +45,6 @@
                 </div>
 			{% endfor %}
             {% endif %}
-  
 					<div class="form-outline mb-4">
 					  <input type="text" id="username" name="username" class="form-control form-control-lg" placeholder="{% trans 'Login' %}" />
 					</div>
@@ -43,14 +55,12 @@
 					<div class="form-outline mb-4">
 						<input type="password" id="password2" name="password2" class="form-control form-control-lg" placeholder="{% trans 'Confirm Password' %}"/>
 					  </div>
-  
 					<div class="pt-1 mb-4">
 					  <button class="btn btn-dark btn-lg btn-block" type="submit">{% trans "Sign Up" %}</button>
 					</div>
 					<p class="mb-5 pb-lg-2" style="color: #393f81;">{% trans 'Have an account?' %}<a href="{% url 'user_app:signin' %}"
 						style="color: #393f81;">{% trans "Sign In" %}</a></p>
 				  </form>
-  
 				</div>
 			  </div>
 			</div>

@@ -1,6 +1,6 @@
 {% load i18n %}
 <div class="container d-flex flex-wrap justify-content-center">
-	<form  method="GET" action="{% url 'dating_app:search_results' %}" role="search">
+	<form  method="GET" action="{% url 'dating_app:dating' %}" role="search">
   <div class="text-end">
   <div class="input-group">
 	<input type="search" style="width: fit-content;" class="form-control" name="q" autocomplete="off" placeholder="{% trans 'Search...' %}" aria-label="Search">

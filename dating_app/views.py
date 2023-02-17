@@ -13,15 +13,23 @@ import random
 def dating(request):
 	profile = Profile.objects.get(pk=request.user.pk)
 	if profile.about:
-		"""Домашняя страница"""
+		"""Поиск пользователей"""
+		query = request.GET.get("q", default = "")
+		sex = request.GET.get('sex', default = ['M', 'F'])
+		if sex == 'ALL':
+			sex = ['M', 'F']
 		
-		profiles_list = User.objects.order_by('-last_login')
-		profiles_list = User.objects.exclude(id=request.user.id)
+		profiles_list = Profile.objects.filter(
+				Q(first_name__icontains=query) | Q(last_name__icontains=query), sex__in=sex
+			).exclude(id=request.user.id)
+
 		context = get_pogination(request, profiles_list, 10)
-		date_now = datetime.now()
-		context.update({'date_now': date_now})
-		context.update({'favorites': Favorite.objects.filter(user=request.user).order_by('-saved_date')})
-		context.update({'saved_to_favorite': Favorite.objects.values_list('saved', flat=True)})
+		if profiles_list:
+			context.update({'query': f'We found {len(profiles_list)} people with name "{query}"'})
+			context.update({'saved_to_favorite': Favorite.objects.values_list('saved', flat=True)})
+			context.update({'favorites': Favorite.objects.filter(user=request.user).order_by('-saved_date')})
+		else:
+			context.update({'query': f'There are no people with name "{query}"'})
 		return render(request, 'dating_app/dating.html', context)
 	return redirect('user_app:sign_up_step_three')
 
@@ -54,32 +62,6 @@ def home(request):
 	profile = Profile.objects.get(pk=request.user.pk)
 	if profile.about:
 		return redirect('dating_app:dating')
-	return redirect('user_app:sign_up_step_three')
-
-
-@login_required
-def search_results(request):
-	profile = Profile.objects.get(pk=request.user.pk)
-	if profile.about:
-		"""Поиск пользователей"""
-		query = request.GET.get("q", default = "")
-		sex = request.GET.get('sex', default = ['M', 'F'])
-		if sex == 'ALL':
-			sex = ['M', 'F']
-		
-		profiles_list = Profile.objects.filter(
-				Q(first_name__icontains=query) | Q(last_name__icontains=query), sex__in=sex
-			).exclude(id=request.user.id)
-
-		context = get_pogination(request, profiles_list, 10)
-		# context.update({'saved_users': SaveUser.objects.filter(user=request.user).order_by('-date')})
-		if profiles_list:
-			context.update({'query': f'We found {len(profiles_list)} people with name "{query}"'})
-			context.update({'saved_to_favorite': Favorite.objects.values_list('saved', flat=True)})
-			context.update({'favorites': Favorite.objects.filter(user=request.user).order_by('-saved_date')})
-		else:
-			context.update({'query': f'There are no people with name "{query}"'})
-		return render(request, 'dating_app/search.html', context)
 	return redirect('user_app:sign_up_step_three')
 
 

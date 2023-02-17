@@ -1,7 +1,7 @@
 {% extends "dating_app/base.html" %}
 {% load crispy_forms_tags %}
 {% load static %}
-
+{% load i18n %}
 {% block content %}
 
 <link rel="stylesheet" href="{% static 'styles/profile_info.css' %}">
@@ -17,45 +17,45 @@
 			<div class="progress-bar" style="width: 66%; background-color: #8538f7;"></div>
 		  </div>
 		{% csrf_token %}
-            <p class="text-center mb-4">STEP 2/3</p>
+            <p class="text-center mb-4">{% trans 'STEP' %} 2/3</p>
             <div class="mb-3">
 				{% if user.profile.city %}
 				<input type="text" name="city" id="id_city" value="{{ user.profile.city }}" autocomplete="off">
 				{% else %}
-                <input type="text" name="city" id="id_city" placeholder="Your country and city" autocomplete="off">
+                <input type="text" name="city" id="id_city" placeholder="{% trans 'Your country and city' %}" autocomplete="off">
 				{% endif %}
             </div>
             <div class="input-group mb-3">
 				<div class="input-group-prepend">
-				  <label class="input-group-text" for="id_sex">I'm a</label>
+				  <label class="input-group-text" for="id_sex">{% trans "I'm a" %}</label>
 				</div>
 				<select class="custom-select" name="sex" id="id_sex">
 					{% if user.profile.sex == "M" %}
-					<option value="M" selected="selected">Male</option>
-					<option value="F">Female</option>
+					<option value="M" selected="selected">{% trans 'Male' %}</option>
+					<option value="F">{% trans 'Female' %}</option>
 					{% else %}
-					<option value="M">Male</option>
-					<option value="F" selected="selected">Female</option>
+					<option value="M">{% trans 'Male' %}</option>
+					<option value="F" selected="selected">{% trans 'Female' %}</option>
 					{% endif %}
 				</select>
 			  </div>
 			  <div class="input-group mb-3">
 				<div class="input-group-prepend">
-				  <label class="input-group-text" for="id_seeking">Seeking a</label>
+				  <label class="input-group-text" for="id_seeking">{% trans 'Seeking a' %}</label>
 				</div>
 				<select class="custom-select" name="seeking" id="id_seeking">
 					{% if user.profile.seeking == "M" %}
-					<option value="M" selected="selected">Male</option>
-					<option value="F">Female</option>
+					<option value="M" selected="selected">{% trans 'Male' %}</option>
+					<option value="F">{% trans 'Female' %}</option>
 					{% else %}
-					<option value="M">Male</option>
-					<option value="F" selected="selected">Female</option>
+					<option value="M">{% trans 'Male' %}</option>
+					<option value="F" selected="selected">{% trans 'Female' %}</option>
 					{% endif %}
 				</select>
 			  </div>
         <div class="form-footer d-flex">
-			<a href="{% url 'user_app:sign_up_step_one' %}" class="previous">Previous</a>
-            <button type="submit">Next</button>
+			<a href="{% url 'user_app:sign_up_step_one' %}" class="previous">{% trans 'Previous' %}</a>
+            <button type="submit">{% trans 'Next' %}</button>
         </div>
     </form>
 </div>

@@ -1,8 +1,9 @@
 {% extends 'chat_app/chat.html' %}
 {% load static %}
+{% load i18n %}
 {% block contacts %}
 {% if not messages_list %}
-			<h6 class="alert alert-warning text-center empty">Your chat is empty</h6>
+			<h6 class="alert alert-warning text-center empty">{% trans 'Your chat is empty' %}</h6>
 {% endif %}
 <ul>
 {% for message in messages_list %}

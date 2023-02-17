@@ -1,5 +1,5 @@
 {% extends "dating_app/base.html" %}
-
+{% load i18n %}
 {% load static %}
 
 {% block content %}
@@ -21,7 +21,7 @@
 					  <i class="fas fa-cubes fa-2x me-3" style="color: #ff6219;"></i>
 					  <span class="h1 fw-bold mb-0"><img src="{% static 'user_app/calambug_logo.png' %}" style="height: 60px;" alt="Calambug"></span>
 					</div>
-					<h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Enter the information you entered while registering.</h5>
+					<h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">{% trans 'Enter the information you entered while registering.' %}</h5>
 					{% if error_signin %}
                 <div class="alert alert-danger" role="alert">
                     <span><svg xmlns="http://www.w3.org/2000/svg" style="align-items: center; margin-top: -5px;" width="16" height="16" fill="currentColor" class="bi bi-exclamation-octagon-fill" viewBox="0 0 16 16">
@@ -36,10 +36,10 @@
 					  <input type="password" id="password" name="password" class="form-control form-control-lg" placeholder="Password" />
 					</div>
 					<div class="pt-1 mb-4">
-					  <button class="btn btn-dark btn-lg btn-block" type="submit">Sign In</button>
+					  <button class="btn btn-dark btn-lg btn-block" type="submit">{% trans 'Sign In' %}</button>
 					</div>
-					<p class="mb-5 pb-lg-2" style="color: #393f81;">Don't have an account? <a href="{% url 'user_app:signup' %}"
-						style="color: #393f81;">Sign Up</a></p>
+					<p class="mb-5 pb-lg-2" style="color: #393f81;">{% trans "Don't have an account?" %}<a href="{% url 'user_app:signup' %}"
+						style="color: #393f81;">{% trans 'Sign Up' %}</a></p>
 				  </form>
 				</div>
 			  </div>

@@ -1,0 +1,296 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-02-16 03:08+0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+#: chat_app/templates/chat_app/chat.html:25
+msgid "Select a chat to start messaging"
+msgstr "Xabarlarni boshlash uchun suhbatni tanlang"
+
+#: chat_app/templates/chat_app/messages_list.html:6
+msgid "Your chat is empty"
+msgstr "Suhbatingiz bo'sh"
+
+#: dating_app/templates/dating_app/base.html:63
+msgid "Signed in as"
+msgstr "Siz"
+
+#: dating_app/templates/dating_app/base.html:69
+msgid "Profile"
+msgstr "Profil"
+
+#: dating_app/templates/dating_app/base.html:74
+#: dating_app/templates/dating_app/favorites.html:9
+msgid "Favorites"
+msgstr "Tanlanganlar"
+
+#: dating_app/templates/dating_app/base.html:81
+msgid "Sign out"
+msgstr "Chiqish"
+
+#: dating_app/templates/dating_app/favorites.html:32
+msgid "Chatting"
+msgstr "Chatting"
+
+#: dating_app/templates/dating_app/favorites.html:35
+msgid "Delete"
+msgstr "O'chirish"
+
+#: dating_app/templates/dating_app/favorites.html:40
+msgid "You haven't favorites"
+msgstr "Sizning sevimlilaringiz yo'q"
+
+#: dating_app/templates/dating_app/partner_account.html:17
+msgid "Chat Now"
+msgstr "Suhbatni boshlash"
+
+#: dating_app/templates/dating_app/partner_account.html:25
+msgid "Photos (Coming soon)"
+msgstr "Rasmlar (tez orada)"
+
+#: dating_app/templates/dating_app/partner_account.html:46
+msgid "Interests"
+msgstr "Qiziqishlar"
+
+#: dating_app/templates/dating_app/partner_account.html:47
+#: dating_app/templates/dating_app/partner_account.html:51
+#: dating_app/templates/dating_app/partner_account.html:61
+#: dating_app/templates/dating_app/partner_account.html:65
+#: dating_app/templates/dating_app/partner_account.html:69
+msgid "Coming soon"
+msgstr "Tez orada"
+
+#: dating_app/templates/dating_app/partner_account.html:50
+msgid "Match Predictor"
+msgstr "Uchrashuv Bashoratchisi"
+
+#: dating_app/templates/dating_app/partner_account.html:56
+msgid "About"
+msgstr "Haqida"
+
+#: dating_app/templates/dating_app/partner_account.html:60
+msgid "Physical Details"
+msgstr "Jismoniy Tafsilotlar"
+
+#: dating_app/templates/dating_app/partner_account.html:64
+msgid "I'm looking for"
+msgstr "Izlayapman"
+
+#: dating_app/templates/dating_app/partner_account.html:68
+msgid "Current Goal"
+msgstr "Hozirgi Maqsad"
+
+#: dating_app/templates/dating_app/partner_account.html:73
+msgid "Similar Users (coming soon)"
+msgstr "O'xshash foydalanuvchilar (tez orada)"
+
+#: dating_app/templates/dating_app/search_bar.html:6
+msgid "Search..."
+msgstr "Qidiruv..."
+
+#: dating_app/templates/dating_app/search_bar.html:9
+#: dating_app/templates/dating_app/search_bar.html:15
+#: dating_app/templates/dating_app/search_bar.html:21
+msgid "All"
+msgstr "Hamma"
+
+#: dating_app/templates/dating_app/search_bar.html:10
+#: dating_app/templates/dating_app/search_bar.html:16
+#: dating_app/templates/dating_app/search_bar.html:22
+msgid "Boys"
+msgstr "Erkaklar"
+
+#: dating_app/templates/dating_app/search_bar.html:11
+#: dating_app/templates/dating_app/search_bar.html:17
+#: dating_app/templates/dating_app/search_bar.html:23
+msgid "Girls"
+msgstr "Ayollar"
+
+#: dating_app/templates/dating_app/search_bar.html:37
+msgid "All boys"
+msgstr "Hamma erkaklar"
+
+#: dating_app/templates/dating_app/search_bar.html:39
+msgid "All girls"
+msgstr "Hamma ayollar"
+
+#: dating_app/templates/dating_app/search_bar.html:41
+msgid "All users"
+msgstr "Barcha foydalanuvchilar"
+
+#: project/settings.py:111
+msgid "Russian"
+msgstr "Русский"
+
+#: project/settings.py:112
+msgid "English"
+msgstr "English"
+
+#: project/settings.py:113
+msgid "Uzbek"
+msgstr "O'zbek"
+
+#: user_app/templates/user_app/sign_in.html:24
+msgid "Enter the information you entered while registering."
+msgstr "Ro'yxatdan o'tish paytida kiritgan ma'lumotlaringizni kiriting."
+
+#: user_app/templates/user_app/sign_in.html:39
+#: user_app/templates/user_app/sign_up.html:51
+msgid "Sign In"
+msgstr "Kirish"
+
+#: user_app/templates/user_app/sign_in.html:41
+msgid "Don't have an account?"
+msgstr "Profilingiz yo'qmi?"
+
+#: user_app/templates/user_app/sign_in.html:42
+#: user_app/templates/user_app/sign_up.html:48
+msgid "Sign Up"
+msgstr "Ro'yxatdan O'tish"
+
+#: user_app/templates/user_app/sign_up.html:25
+msgid "It's Never too late<br>to Find Match"
+msgstr "Muhabbatni nigohlardan aniqlaguncha, uni ovozdan eshitish mumkin."
+
+#: user_app/templates/user_app/sign_up.html:37
+msgid "Login"
+msgstr "Login"
+
+#: user_app/templates/user_app/sign_up.html:41
+msgid "Password"
+msgstr "Maxfiy so'z"
+
+#: user_app/templates/user_app/sign_up.html:44
+msgid "Confirm Password"
+msgstr "Maxfiy So'zni Tasdiqlash"
+
+#: user_app/templates/user_app/sign_up.html:50
+msgid "Have an account?"
+msgstr "Profilingiz bormi?"
+
+#: user_app/templates/user_app/sign_up_step_one.html:20
+#: user_app/templates/user_app/sign_up_step_three.html:20
+#: user_app/templates/user_app/sign_up_step_two.html:20
+msgid "STEP"
+msgstr "QADAM"
+
+#: user_app/templates/user_app/sign_up_step_one.html:25
+#: user_app/templates/user_app/user_account.html:39
+msgid "First name"
+msgstr "Ismingiz"
+
+#: user_app/templates/user_app/sign_up_step_one.html:32
+#: user_app/templates/user_app/user_account.html:43
+msgid "Last name"
+msgstr "Familiyangiz"
+
+#: user_app/templates/user_app/sign_up_step_one.html:39
+#: user_app/templates/user_app/user_account.html:55
+msgid "Age"
+msgstr "Yoshiz"
+
+#: user_app/templates/user_app/sign_up_step_one.html:43
+#: user_app/templates/user_app/sign_up_step_two.html:58
+msgid "Next"
+msgstr "Keyingi"
+
+#: user_app/templates/user_app/sign_up_step_three.html:27
+msgid "About you"
+msgstr "Siz haqingizda"
+
+#: user_app/templates/user_app/sign_up_step_three.html:30
+#: user_app/templates/user_app/sign_up_step_two.html:57
+msgid "Previous"
+msgstr "Orqaga"
+
+#: user_app/templates/user_app/sign_up_step_three.html:31
+msgid "Done"
+msgstr "Bajarish"
+
+#: user_app/templates/user_app/sign_up_step_two.html:25
+msgid "Your country and city"
+msgstr "Sizning mamlakatingiz va shahringiz"
+
+#: user_app/templates/user_app/sign_up_step_two.html:30
+msgid "I'm a"
+msgstr "Men"
+
+#: user_app/templates/user_app/sign_up_step_two.html:34
+#: user_app/templates/user_app/sign_up_step_two.html:37
+#: user_app/templates/user_app/sign_up_step_two.html:48
+#: user_app/templates/user_app/sign_up_step_two.html:51
+#: user_app/templates/user_app/user_account.html:67
+#: user_app/templates/user_app/user_account.html:72
+#: user_app/templates/user_app/user_account.html:81
+#: user_app/templates/user_app/user_account.html:86
+msgid "Male"
+msgstr "Erkak"
+
+#: user_app/templates/user_app/sign_up_step_two.html:35
+#: user_app/templates/user_app/sign_up_step_two.html:38
+#: user_app/templates/user_app/sign_up_step_two.html:49
+#: user_app/templates/user_app/sign_up_step_two.html:52
+#: user_app/templates/user_app/user_account.html:68
+#: user_app/templates/user_app/user_account.html:73
+#: user_app/templates/user_app/user_account.html:82
+#: user_app/templates/user_app/user_account.html:87
+msgid "Female"
+msgstr "Ayol"
+
+#: user_app/templates/user_app/sign_up_step_two.html:44
+msgid "Seeking a"
+msgstr "Qidirilmoqda"
+
+#: user_app/templates/user_app/user_account.html:13
+msgid "Media"
+msgstr "Media"
+
+#: user_app/templates/user_app/user_account.html:23
+msgid "Wrapper"
+msgstr "Banner"
+
+#: user_app/templates/user_app/user_account.html:28
+msgid "Picture"
+msgstr "Rasm"
+
+#: user_app/templates/user_app/user_account.html:35
+msgid "Information"
+msgstr "Axborot"
+
+#: user_app/templates/user_app/user_account.html:48
+msgid "Username"
+msgstr "Login"
+
+#: user_app/templates/user_app/user_account.html:59
+msgid "Location"
+msgstr "Sizning mamlakatingiz va shahringiz"
+
+#: user_app/templates/user_app/user_account.html:64
+msgid "Sex"
+msgstr "Jinsingiz"
+
+#: user_app/templates/user_app/user_account.html:78
+msgid "Seeking"
+msgstr "Qidirilmoqda"
+
+#: user_app/templates/user_app/user_account.html:93
+msgid "About Me"
+msgstr "Men Haqimda"
+
+#: user_app/templates/user_app/user_account.html:97
+msgid "Save Changes"
+msgstr "O'zgarishlarni Saqlash"

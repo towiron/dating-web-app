@@ -1,5 +1,6 @@
 {% extends "dating_app/base.html" %}
 {% load static %}
+{% load i18n %}
 {% block content %}
 <div class="container">
 <link rel="stylesheet" href="{% static 'styles/chat_app.css' %}">
@@ -21,7 +22,7 @@
 	<div class="content">
 		<div class="messages">
 			{% if not messages %}
-			<h6 class="alert alert-warning text-center">Select a chat to start messaging</h6>
+			<h6 class="alert alert-warning text-center">{% trans 'Select a chat to start messaging' %}</h6>
 			{% endif %}
 			{% block message %}
 			{% endblock %}

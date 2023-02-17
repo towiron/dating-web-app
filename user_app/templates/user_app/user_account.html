@@ -1,7 +1,7 @@
 {% extends "dating_app/base.html" %}
 {% load crispy_forms_tags %}
 {% load static %}
-
+{% load i18n %}
 {% block content %}
 <link rel="stylesheet" href="{% static "styles/user_account.css" %}">
 <div class="container">
@@ -10,7 +10,7 @@
       {% csrf_token %}
     <div class="row g-5">
       <div class="col-md-6 col-lg-6 order-md-last">
-        <h4 class="mb-3">Media</h4>
+        <h4 class="mb-3">{% trans 'Media' %}</h4>
         {% if error %}
         <p class="alert alert-danger"><svg xmlns="http://www.w3.org/2000/svg" style="margin-bottom: 5px;" width="16" height="16" fill="currentColor" class="bi bi-exclamation-octagon-fill" viewBox="0 0 16 16">
           <path d="M11.46.146A.5.5 0 0 0 11.107 0H4.893a.5.5 0 0 0-.353.146L.146 4.54A.5.5 0 0 0 0 4.893v6.214a.5.5 0 0 0 .146.353l4.394 4.394a.5.5 0 0 0 .353.146h6.214a.5.5 0 0 0 .353-.146l4.394-4.394a.5.5 0 0 0 .146-.353V4.893a.5.5 0 0 0-.146-.353L11.46.146zM8 4c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995A.905.905 0 0 1 8 4zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
@@ -20,81 +20,81 @@
           <div class="card-body little-profile text-center">
               <div class="pro-img"><img src="{{ user.profile.profile_pic.url }}" style="object-fit: cover; object-position: center;"  alt="user"></div>
               <div class="input-group">
-                <label class="input-group-text" for="id_banner">Wrapper</label>
+                <label class="input-group-text" for="id_banner">{% trans 'Wrapper' %}</label>
                 <input type="file" name="banner" class="form-control" id="id_banner">
               </div>
               <hr>
               <div class="input-group">
-                <label class="input-group-text" for="id_profile_pic">Picture</label>
+                <label class="input-group-text" for="id_profile_pic">{% trans 'Picture' %}</label>
                 <input type="file" name="profile_pic" class="form-control" id="id_profile_pic">
               </div>
           </div>
       </div>
       </div>
       <div class="col-md-6 col-lg-6">
-        <h4 class="mb-3">Information</h4>
+        <h4 class="mb-3">{% trans 'Information' %}</h4>
         <form class="needs-validation" novalidate>
           <div class="row g-3">
             <div class="col-sm-6">
-              <label for="firstName" class="form-label">First name</label>
+              <label for="firstName" class="form-label">{% trans 'First name' %}</label>
               <input type="text" name="first_name" id="id_first_name" class="form-control" value="{{ user.profile.first_name }}">
             </div>
             <div class="col-sm-6">
-              <label for="lastName" class="form-label">Last name</label>
+              <label for="lastName" class="form-label">{% trans 'Last name' %}</label>
               <input type="text" name="last_name" id="id_last_name" class="form-control" value="{{ user.profile.last_name }}">
             </div>
 
             <div class="col-8">
-              <label for="username" class="form-label">Username</label>
+              <label for="username" class="form-label">{% trans 'Username' %}</label>
               <div class="input-group has-validation">
                 <span class="input-group-text">@</span>
                 <input type="text" name="username" id="username" class="form-control" value="{{ user.username }}">
               </div>
             </div>
             <div class="col-4">
-              <label for="age" class="form-label">Age</label>
+              <label for="age" class="form-label">{% trans 'Age' %}</label>
                 <input type="number" class="form-control" name="age" value="{{ user.profile.age }}" id="id_age" min="18" max="99" pattern="[0-9]{3}"  autocomplete="off">
               </div>
             <div class="col">
-              <label for="city" class="form-label">Location</label>
+              <label for="city" class="form-label">{% trans 'Location' %}</label>
               <input type="text" name="city" id="id_city" class="form-control" value="{{ user.profile.city }}" placeholder="Your country and city">
             </div>
           <hr>
           <div class="col">
-            <label for="firstName" class="form-label">Sex</label>
+            <label for="firstName" class="form-label">{% trans 'Sex' %}</label>
             {% if user.profile.sex == "M" %}
             <select name="sex" class="form-control" id="id_sex">
-            <option value="M" selected="selected">Male</option>
-            <option value="F">Female</option>
+            <option value="M" selected="selected">{% trans 'Male' %}</option>
+            <option value="F">{% trans 'Female' %}</option>
             </select>
             {% else %}
             <select name="sex" class="form-control" id="id_sex">
-            <option value="M">Male</option>
-            <option value="F" selected="selected">Female</option>
+            <option value="M">{% trans 'Male' %}</option>
+            <option value="F" selected="selected">{% trans 'Female' %}</option>
             </select>
             {% endif %}
           </div>
           <div class="col">
-            <label for="country" class="form-label">Seeking</label>
+            <label for="country" class="form-label">{% trans 'Seeking' %}</label>
             {% if user.profile.seeking == "M" %}
             <select name="seeking" class="form-control" id="id_seeking">
-            <option value="M" selected="selected">Male</option>
-            <option value="F">Female</option>
+            <option value="M" selected="selected">{% trans 'Male' %}</option>
+            <option value="F">{% trans 'Female' %}</option>
             </select>
             {% else %}
             <select name="seeking" class="form-control" id="id_seeking">
-            <option value="M">Male</option>
-            <option value="F" selected="selected">Female</option>
+            <option value="M">{% trans 'Male' %}</option>
+            <option value="F" selected="selected">{% trans 'Female' %}</option>
             </select>
             {% endif %}
           </div>
           <hr class="my-4">
           <div class="col">
-            <label for="about" class="form-label">About Me</label>
+            <label for="about" class="form-label">{% trans 'About Me' %}</label>
             <textarea type="textarea" class="form-control" rows="5" name="about" id="id_about">{{ user.profile.about }}</textarea>
           </div>
           <div class="my-4 text-center">
-            <button class="btn btn-outline-info" type="submit">Save Changes</button>
+            <button class="btn btn-outline-info" type="submit">{% trans 'Save Changes' %}</button>
           </div>
 
     </div>

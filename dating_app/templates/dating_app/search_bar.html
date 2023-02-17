@@ -1,25 +1,26 @@
+{% load i18n %}
 <div class="container d-flex flex-wrap justify-content-center">
 	<form  method="GET" action="{% url 'dating_app:search_results' %}" role="search">
   <div class="text-end">
   <div class="input-group">
-	<input type="search" style="width: 150px; " class="form-control" name="q" autocomplete="off" placeholder="Search..." aria-label="Search">
+	<input type="search" style="width: fit-content;" class="form-control" name="q" autocomplete="off" placeholder="{% trans 'Search...' %}" aria-label="Search">
 	{% if request.GET.sex == 'M' %}
-	<select class="form-select" name="sex" style="width: 100px;">
-		<option value="ALL">All</option>
-		<option value="M" selected="selected">Boys</option>
-		<option value="F">Girls</option>
+	<select class="form-select" name="sex" style="width: fit-content;" data-width="fit">
+		<option value="ALL">{% trans 'All' %}</option>
+		<option value="M" selected="selected">{% trans 'Boys' %}</option>
+		<option value="F">{% trans 'Girls' %}</option>
 	  </select>
 	{% elif request.GET.sex == 'F' %}
-	<select class="form-select" name="sex" style="width: 80px;">
-		<option value="ALL">All</option>
-		<option value="M">Boys</option>
-		<option value="F" selected="selected">Girls</option>
+	<select class="form-select" name="sex" style="width: fit-content;" data-width="fit">
+		<option value="ALL">{% trans 'All' %}</option>
+		<option value="M">{% trans 'Boys' %}</option>
+		<option value="F" selected="selected">{% trans 'Girls' %}</option>
 	  </select>
 	{% else %}
-	<select class="form-select" name="sex" style="width: 80px;">
-	  <option value="ALL" selected="selected">All</option>
-	  <option value="M">Boys</option>
-	  <option value="F">Girls</option>
+	<select class="form-select" name="sex" style="width: fit-content;" data-width="fit">
+	  <option value="ALL" selected="selected">{% trans 'All' %}</option>
+	  <option value="M">{% trans 'Boys' %}</option>
+	  <option value="F">{% trans 'Girls' %}</option>
 	</select>
 	{% endif %}
 	<button class="btn btn-primary" style="background-color: #8538f7; border: none;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
@@ -33,9 +34,9 @@
 {% if request.GET.q %}
 <h6 class="text-center">{{ query }}</h6>
 {% elif request.GET.q == "" and request.GET.sex == "M" %}
-<h6 class="text-center">All boys</h6>
+<h6 class="text-center">{% trans 'All boys' %}</h6>
 {% elif request.GET.q == "" and request.GET.sex == "F" %}
-<h6 class="text-center">All girls</h6>
+<h6 class="text-center">{% trans 'All girls' %}</h6>
 {% else %}
-<h6 class="text-center">All users</h6>
+<h6 class="text-center">{% trans 'All users' %}</h6>
 {% endif %}

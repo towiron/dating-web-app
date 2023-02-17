@@ -1,0 +1,307 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-02-16 02:31+0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
+"(n%100>=11 && n%100<=14)? 2 : 3);\n"
+
+#: chat_app/templates/chat_app/chat.html:25
+msgid "Select a chat to start messaging"
+msgstr "Выберите чат, чтобы начать обмен сообщениями"
+
+#: chat_app/templates/chat_app/messages_list.html:6
+msgid "Your chat is empty"
+msgstr "Ваш чат пуст"
+
+#: dating_app/templates/dating_app/base.html:47
+msgid "Signed in as"
+msgstr "Пользователь"
+
+#: dating_app/templates/dating_app/base.html:53
+msgid "Profile"
+msgstr "Профиль"
+
+#: dating_app/templates/dating_app/base.html:58
+#: dating_app/templates/dating_app/favorites.html:9
+msgid "Favorites"
+msgstr "Избранные"
+
+#: dating_app/templates/dating_app/base.html:65
+msgid "Sign out"
+msgstr "Выйти"
+
+#: dating_app/templates/dating_app/favorites.html:32
+msgid "Chatting"
+msgstr "Общение в чате"
+
+#: dating_app/templates/dating_app/favorites.html:35
+msgid "Delete"
+msgstr "Удалить"
+
+#: dating_app/templates/dating_app/favorites.html:40
+msgid "You haven't favorites"
+msgstr "Пока никого нет"
+
+#: dating_app/templates/dating_app/partner_account.html:17
+msgid "Chat Now"
+msgstr "Написать сообщение"
+
+#: dating_app/templates/dating_app/partner_account.html:25
+msgid "Photos (Coming soon)"
+msgstr "Фотографии (скоро будут)"
+
+#: dating_app/templates/dating_app/partner_account.html:46
+msgid "Interests"
+msgstr "Интересы"
+
+#: dating_app/templates/dating_app/partner_account.html:47
+#: dating_app/templates/dating_app/partner_account.html:51
+#: dating_app/templates/dating_app/partner_account.html:61
+#: dating_app/templates/dating_app/partner_account.html:65
+#: dating_app/templates/dating_app/partner_account.html:69
+msgid "Coming soon"
+msgstr "Скоро будет"
+
+#: dating_app/templates/dating_app/partner_account.html:50
+msgid "Match Predictor"
+msgstr "Вероятность совместимости"
+
+#: dating_app/templates/dating_app/partner_account.html:56
+msgid "About"
+msgstr "О нем/ней"
+
+#: dating_app/templates/dating_app/partner_account.html:60
+msgid "Physical Details"
+msgstr "Физические данные"
+
+#: dating_app/templates/dating_app/partner_account.html:64
+msgid "I'm looking for"
+msgstr "Я ищу"
+
+#: dating_app/templates/dating_app/partner_account.html:68
+msgid "Current Goal"
+msgstr "Текущая цель"
+
+#: dating_app/templates/dating_app/partner_account.html:73
+msgid "Similar Users (coming soon)"
+msgstr "Похожие пользователи (скоро появится)"
+
+#: dating_app/templates/dating_app/search_bar.html:6
+msgid "Search..."
+msgstr "Поиск..."
+
+#: dating_app/templates/dating_app/search_bar.html:9
+#: dating_app/templates/dating_app/search_bar.html:15
+#: dating_app/templates/dating_app/search_bar.html:21
+msgid "All"
+msgstr "Все"
+
+#: dating_app/templates/dating_app/search_bar.html:10
+#: dating_app/templates/dating_app/search_bar.html:16
+#: dating_app/templates/dating_app/search_bar.html:22
+msgid "Boys"
+msgstr "Парни"
+
+#: dating_app/templates/dating_app/search_bar.html:11
+#: dating_app/templates/dating_app/search_bar.html:17
+#: dating_app/templates/dating_app/search_bar.html:23
+msgid "Girls"
+msgstr "Девушки"
+
+#: dating_app/templates/dating_app/search_bar.html:37
+msgid "All boys"
+msgstr "Все парни"
+
+#: dating_app/templates/dating_app/search_bar.html:39
+msgid "All girls"
+msgstr "Все девушки"
+
+#: dating_app/templates/dating_app/search_bar.html:41
+msgid "All users"
+msgstr "Все пользователи"
+
+#: project/settings.py:111
+msgid "Russian"
+msgstr "Русский"
+
+#: project/settings.py:112
+msgid "English"
+msgstr "English"
+
+#: project/settings.py:113
+msgid "Uzbek"
+msgstr "Uzbek"
+
+#: user_app/templates/user_app/sign_in.html:24
+msgid "Enter the information you entered while registering."
+msgstr "Введите информацию, которую вы ввели при регистрации."
+
+#: user_app/templates/user_app/sign_in.html:39
+#: user_app/templates/user_app/sign_up.html:51
+msgid "Sign In"
+msgstr "Войти"
+
+#: user_app/templates/user_app/sign_in.html:41
+msgid "Don't have an account?"
+msgstr "У вас нет аккаунта?"
+
+#: user_app/templates/user_app/sign_in.html:42
+#: user_app/templates/user_app/sign_up.html:48
+msgid "Sign Up"
+msgstr "Зарегистрироваться"
+
+#: user_app/templates/user_app/sign_up.html:25
+msgid "It's Never too late<br>to Find Match"
+msgstr "Найти пару<br>никогда не поздно"
+
+#: user_app/templates/user_app/sign_up.html:37
+msgid "Login"
+msgstr "Имя пользователя"
+
+#: user_app/templates/user_app/sign_up.html:41
+msgid "Password"
+msgstr "Пароль"
+
+#: user_app/templates/user_app/sign_up.html:44
+msgid "Confirm Password"
+msgstr "Подтверждение пароля"
+
+#: user_app/templates/user_app/sign_up.html:50
+msgid "Have an account?"
+msgstr "У вас есть аккаунт?"
+
+#: user_app/templates/user_app/sign_up_step_one.html:20
+#: user_app/templates/user_app/sign_up_step_three.html:20
+#: user_app/templates/user_app/sign_up_step_two.html:20
+msgid "STEP"
+msgstr "ШАГ"
+
+#: user_app/templates/user_app/sign_up_step_one.html:25
+#: user_app/templates/user_app/user_account.html:39
+msgid "First name"
+msgstr "Имя"
+
+#: user_app/templates/user_app/sign_up_step_one.html:32
+#: user_app/templates/user_app/user_account.html:43
+msgid "Last name"
+msgstr "Фамилия"
+
+#: user_app/templates/user_app/sign_up_step_one.html:39
+#: user_app/templates/user_app/user_account.html:55
+msgid "Age"
+msgstr "Возраст"
+
+#: user_app/templates/user_app/sign_up_step_one.html:43
+#: user_app/templates/user_app/sign_up_step_two.html:58
+msgid "Next"
+msgstr "Следующий"
+
+#: user_app/templates/user_app/sign_up_step_three.html:27
+msgid "About you"
+msgstr "О себе"
+
+#: user_app/templates/user_app/sign_up_step_three.html:30
+#: user_app/templates/user_app/sign_up_step_two.html:57
+msgid "Previous"
+msgstr "Назад"
+
+#: user_app/templates/user_app/sign_up_step_three.html:31
+msgid "Done"
+msgstr "Готово"
+
+#: user_app/templates/user_app/sign_up_step_two.html:25
+msgid "Your country and city"
+msgstr "Ваша страна и город"
+
+#: user_app/templates/user_app/sign_up_step_two.html:30
+msgid "I'm a"
+msgstr "Я"
+
+#: user_app/templates/user_app/sign_up_step_two.html:34
+#: user_app/templates/user_app/sign_up_step_two.html:37
+#: user_app/templates/user_app/sign_up_step_two.html:48
+#: user_app/templates/user_app/sign_up_step_two.html:51
+#: user_app/templates/user_app/user_account.html:67
+#: user_app/templates/user_app/user_account.html:72
+#: user_app/templates/user_app/user_account.html:81
+#: user_app/templates/user_app/user_account.html:86
+msgid "Male"
+msgstr "Мужчина"
+
+#: user_app/templates/user_app/sign_up_step_two.html:35
+#: user_app/templates/user_app/sign_up_step_two.html:38
+#: user_app/templates/user_app/sign_up_step_two.html:49
+#: user_app/templates/user_app/sign_up_step_two.html:52
+#: user_app/templates/user_app/user_account.html:68
+#: user_app/templates/user_app/user_account.html:73
+#: user_app/templates/user_app/user_account.html:82
+#: user_app/templates/user_app/user_account.html:87
+msgid "Female"
+msgstr "Женщина"
+
+#: user_app/templates/user_app/sign_up_step_two.html:44
+msgid "Seeking a"
+msgstr "Ищу"
+
+#: user_app/templates/user_app/user_account.html:13
+msgid "Media"
+msgstr "Медиа"
+
+#: user_app/templates/user_app/user_account.html:23
+msgid "Wrapper"
+msgstr "Обложка"
+
+#: user_app/templates/user_app/user_account.html:28
+msgid "Picture"
+msgstr "Фотография"
+
+#: user_app/templates/user_app/user_account.html:35
+msgid "Information"
+msgstr "Информация"
+
+#: user_app/templates/user_app/user_account.html:48
+msgid "Username"
+msgstr "Имя пользователя"
+
+#: user_app/templates/user_app/user_account.html:59
+msgid "Location"
+msgstr "Ваша страна и город"
+
+#: user_app/templates/user_app/user_account.html:64
+msgid "Sex"
+msgstr "Пол"
+
+#: user_app/templates/user_app/user_account.html:78
+msgid "Seeking"
+msgstr "Ищу"
+
+#: user_app/templates/user_app/user_account.html:93
+msgid "About Me"
+msgstr "О себе"
+
+#: user_app/templates/user_app/user_account.html:97
+msgid "Save Changes"
+msgstr "Сохранить изменения"
+
+#, fuzzy
+#~ msgid "Sign up"
+#~ msgstr "Зарегистрироваться"
+
+#, fuzzy
+#~ msgid "Sign in"
+#~ msgstr "Войти"

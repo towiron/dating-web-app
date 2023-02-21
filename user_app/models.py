@@ -12,12 +12,6 @@ class Profile(models.Model):
     class SexOptions(models.TextChoices):
         MALE = 'M', ('Male')
         FEMALE = 'F', ('Female')
-    
-
-    class ThemeOptions(models.TextChoices):
-        LIGHT = 'L', ('Light')
-        DARK = 'D', ('Dark')
-
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     first_name = models.CharField(max_length=20, null=True, blank=True)
     last_name = models.CharField(max_length=30, null=True, blank=True)
@@ -29,7 +23,6 @@ class Profile(models.Model):
     about = models.TextField(null=True, blank=True)
     city = models.CharField(max_length=255, null=True, blank=True)
     online_status = models.BooleanField(null=True, blank=True, default=False)
-    theme = models.CharField(max_length=1, choices=ThemeOptions.choices, blank=True, null=True) 
     def __str__(self):
         return self.user.username
     def save(self, *args, **kwargs):

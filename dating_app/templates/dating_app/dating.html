@@ -44,7 +44,7 @@
 </div>
 <ul class="pagination justify-content-center flex-wrap mt-2 mb-4">
     {% if cards.has_previous %}
-        <li class="page-item"><a class="page-link" href="?q={{ request.GET.q }}&sex={{ request.GET.sex }}&page={{ cards.previous_page_number }}" style="color: #8538f7;">&laquo;</a></li>
+        <li class="page-item"><a class="page-link" href="?q={{ request.GET.q }}&{% if sex %}sex={{ request.GET.sex }}{% else %}sex=ALL{% endif %}&page={{ cards.previous_page_number }}" style="color: #8538f7;">&laquo;</a></li>
     {% else %}
         <li class="disabled page-item"><span class="page-link" style="color: #8538f7; border: none;">&laquo;</span></li>
     {% endif %}
@@ -56,12 +56,12 @@
             {% if i == cards.paginator.ELLIPSIS %}
                 <li class="page-item"><span class="page-link" style="color: #8538f7;">{{ i }}</span></li>
             {% else %}
-                <li class="page-item"><a class="page-link" style="color: #8538f7;" href="?q={{ request.GET.q }}&sex={{ request.GET.sex }}&page={{ i }}">{{ i }}</a></li>
+                <li class="page-item"><a class="page-link" style="color: #8538f7;" href="?q={{ request.GET.q }}&{% if sex %}sex={{ request.GET.sex }}{% else %}sex=ALL{% endif %}&page={{ i }}">{{ i }}</a></li>
             {% endif %}
         {% endif %}
     {% endfor %}
     {% if cards.has_next %}
-        <li class="page-item"><a class="page-link" style="color: #8538f7;" href="?q={{ request.GET.q }}&sex={{ request.GET.sex }}&page={{ cards.next_page_number }}">&raquo;</a></li>
+        <li class="page-item"><a class="page-link" style="color: #8538f7;" href="?q={{ request.GET.q }}&{% if sex %}sex={{ request.GET.sex }}{% else %}sex=ALL{% endif %}&page={{ cards.next_page_number }}">&raquo;</a></li>
     {% else %}
         <li class="disabled page-item"><span class="page-link" style="color: #8538f7; border: none;">&raquo;</span></li>
     {% endif %}

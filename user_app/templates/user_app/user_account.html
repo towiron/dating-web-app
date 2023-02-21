@@ -30,6 +30,19 @@
               </div>
           </div>
       </div>
+      <h4 class="mb-3 mt-3">{% trans 'Theme' %}</h4>
+      <label for="theme" class="form-label">{% trans 'Theme' %}</label>
+            {% if user.profile.theme == "D" %}
+            <select name="theme" class="form-control" id="id_theme">
+            <option value="D" selected="selected">{% trans 'Dark' %}</option>
+            <option value="L">{% trans 'Light' %}</option>
+            </select>
+            {% else %}
+            <select name="theme" class="form-control" id="id_theme">
+            <option value="D">{% trans 'Dark' %}</option>
+            <option value="L" selected="selected">{% trans 'Light' %}</option>
+            </select>
+            {% endif %}
       </div>
       <div class="col-md-6 col-lg-6">
         <h4 class="mb-3">{% trans 'Information' %}</h4>
@@ -96,7 +109,7 @@
           <div class="my-4 text-center">
             <button class="btn btn-outline-info" type="submit">{% trans 'Save Changes' %}</button>
           </div>
-
+          {{ p_form }}
     </div>
   </form>
 </div>

@@ -3,7 +3,6 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from user_app.models import Profile
 from django.db.models import Q
-from datetime import datetime
 from django.core.paginator import Paginator, EmptyPage, InvalidPage
 from .models import Favorite
 import random
@@ -15,7 +14,7 @@ def dating(request):
 	if profile.about:
 		"""Поиск пользователей"""
 		query = request.GET.get("q", default = "")
-		sex = request.GET.get('sex', default = ['M', 'F'])
+		sex = request.GET.get('sex', default = "ALL")
 		if sex == 'ALL':
 			sex = ['M', 'F']
 		

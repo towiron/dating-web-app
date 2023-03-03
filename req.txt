@@ -1,12 +1,17 @@
 asgiref==3.6.0
 Django==4.1.5
 django-crispy-forms==1.14.0
+django-dbbackup==4.0.2
 django-extensions==3.2.1
+django-modeltranslation==0.18.9
+django-seed==0.3.1
 django_debug_toolbar==3.8.1
 Faker==16.6.1
 Pillow==9.4.0
 python-dateutil==2.8.2
+pytz==2022.7.1
 six==1.16.0
 sqlparse==0.4.3
 toposort==1.9
+typing_extensions==4.5.0
 whitenoise==6.3.0

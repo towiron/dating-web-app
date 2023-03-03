@@ -20,12 +20,18 @@ INSTALLED_APPS = [
     # 'django_seed', # DJANGO seed for fake DB
     'django_extensions',
 
+    'dbbackup',  # django-dbbackup
+
     # Apps
     'chat_app',
     'dating_app',
     'user_app',
     'crispy_forms',
 ]
+
+
+DBBACKUP_STORAGE = 'django.core.files.storage.FileSystemStorage'
+DBBACKUP_STORAGE_OPTIONS = {'location': BASE_DIR / 'backup'}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

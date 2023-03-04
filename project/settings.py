@@ -9,6 +9,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # THIRD_PARTY_APPS = ["django_countries", "django_seed"]
 
 INSTALLED_APPS = [
+    'django_crontab',
     'modeltranslation',
     'django.contrib.admin',
     # "debug_toolbar", #tool bar
@@ -32,6 +33,10 @@ INSTALLED_APPS = [
 
 DBBACKUP_STORAGE = 'django.core.files.storage.FileSystemStorage'
 DBBACKUP_STORAGE_OPTIONS = {'location': BASE_DIR / 'backup'}
+
+CRONJOBS = [
+    ('*/1 * * * *', 'project.cron.my_cron_job')
+]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

@@ -90,5 +90,8 @@ def random_card(request):
 	profile = Profile.objects.get(pk=request.user.pk)
 	card_list = list(Profile.objects.filter(sex__in=str(profile.seeking)
 			).exclude(id=request.user.id))
-	random_card = random.sample(card_list, 1)
+	if card_list:
+		random_card = random.sample(card_list, 1)
+	else:
+		random_card = None
 	return render(request, 'dating_app/random_card.html', {'random_card':random_card, 'favorites': Favorite.objects.filter(user=request.user).order_by('-saved_date')})

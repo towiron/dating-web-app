@@ -23,8 +23,8 @@ jobs:
       - name: Deploy
         uses: wlixcc/SFTP-Deploy-Action@v1.2.1
         with:
-          username: botir
-          server: 134.122.71.115
+          username: towiron
+          server: 167.172.163.27
           port: 22 # default is 22
           ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
  
@@ -32,7 +32,7 @@ jobs:
           # will put all file under this path
           local_path: ./* # default is ./*
           # files will copy to under remote_path
-          remote_path: /home/botir/dating-web-app
+          remote_path: /home/towiron/dating-web-app
           
           # sftp args
           args: '-o ConnectTimeout=5'

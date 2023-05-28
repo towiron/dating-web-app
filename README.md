@@ -1,37 +1,73 @@
-Сайт знакомств на Django.
+## Calambug Dating Web App
+The dating website project developed on Django is a powerful and reliable tool for people who are looking for their significant other. The website provides a high degree of personalization, security, and performance, making it an ideal choice for anyone who wants to find love online.
 
-***[Calambug](https://calambug.fun/)*** <em>\- знакомства</em> и общение с интересными людьми по всему миру. Присоединяйся и найди новых друзей уже сегодня.
+## About The Project
 
-### TODO
+|  | Notes |
+|--|--|
+| ✅ | Registration / Authorization / Authentication |
+| ✅ | Personalization (profile pic, cover and personal information) |
+| ✅ | Chat between users |
+| ✅ | Search (with filter) |
+| ✅ | Internationalization and localization I18N |
+| ✅ | Recommendation for dating |
+| ✅ | Adding to Favorites |
 
-***
 
-* Рефакторинг
-* ~~Поиск пользователей~~
-* ~~Фильтр пользователей в главном меню~~
-* Фотоальбом пользователя
-* ~~Лайк/дизлайк пользователя~~
-* Стена пользователя
-* ~~Превью профиля~~
-* ~~Бар-успеха для показа успешности аккаунта по заполненным данным~~
+### Built With
+- ![Python](https://img.shields.io/badge/Python%20-%2314354C.svg?style=for-the-badge&logo=python&logoColor=white)
+- ![Django](https://img.shields.io/badge/Django-092E20?style=for-the-badge&logo=django&logoColor=green)
+- ![SQLite](https://img.shields.io/badge/SQLite-07405E?style=for-the-badge&logo=sqlite&logoColor=white)
+- ![Bootstrap](https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white)
+- ![Docker](https://img.shields.io/badge/Docker-2CA5E0?style=for-the-badge&logo=docker&logoColor=white)
+## Getting Started
+Clone repository
 
-### Установка
+    git clone https://github.com/towiron/dating-web-app.git
 
-***
+### Start with docker
 
-```
-git clone https://github.com/towiron/dating-web-app.git
-python3 -m venv virtualenv_name
-souce virtualenv_name/bin/activate
-pip3 install -r req.txt
-```
+1.Go into the repository
 
-### Запуск
+    cd dating-web-app
 
-***
+2.Build Docker image
 
-```
-python3 manage.py makemigrations
-python3 manage.py migrate
-python3 manage.py runserver
-```
+    docker build -t dating
+
+3.Run Docker image
+
+    docker run --name dating_web_app -p 8000:8000 -d dating
+
+4.Open the browser and go to http://localhost:8000/
+
+### Start locally
+1.Go to the repository
+
+    cd dating-web-app
+
+2.Create Python virtual environment
+
+    python3 -m venv venv
+
+ 3.Activate a Python virtual environment and install dependencies:
+> (MacOS/Unix)
+
+     source venv/bin/activate
+     pip3 install -r req.txt
+> (Windows)
+
+    venv\Scripts\activate.bat
+    pip3 install -r req.txt
+
+ 4.For first time you need to create a SQLite database, by running the command
+ 
+
+    python3 manage.py migrate
+
+ 
+5.Run the server
+
+    python3 manage.py runserver
+
+ 6.Open the browser and go to http://localhost:8000/
